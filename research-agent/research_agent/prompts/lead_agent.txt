@@ -90,7 +90,7 @@ For researchers:
 For report-writer:
 - subagent_type: "report-writer"
 - description: "Synthesize research into final report"
-- prompt: "Read all research notes from files/research_notes/ and create a comprehensive one-page summary report in files/reports/. Follow the professional-research-summary skill formatting."
+- prompt: "Read all research notes from files/research_notes/ and create a comprehensive one-page summary report in files/reports/."
 </task_tool_usage>
 
 <examples>
