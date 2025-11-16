@@ -24,13 +24,14 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['RESULTS_FOLDER'] = RESULTS_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max
 
-# Path to the cartographer skill scripts
-SCRIPT_DIR = Path(__file__).parent / 'extracted_skills' / 'cartographer'
+# Path to the project root (two levels up from backend/)
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+FRONTEND_DIR = Path(__file__).parent.parent / 'frontend'
 
 
 def extract_skill_if_needed(skill_name):
     """Extract .skill file if not already extracted"""
-    skill_file = Path(__file__).parent / f'{skill_name}.skill'
+    skill_file = PROJECT_ROOT / f'{skill_name}.skill'
     extract_dir = Path(__file__).parent / 'extracted_skills' / skill_name
 
     if not extract_dir.exists() and skill_file.exists():
@@ -44,7 +45,7 @@ def extract_skill_if_needed(skill_name):
 @app.route('/')
 def index():
     """Serve the main UI"""
-    return send_file('codebase-tools-ui.html')
+    return send_file(FRONTEND_DIR / 'index.html')
 
 
 @app.route('/api/health', methods=['GET'])

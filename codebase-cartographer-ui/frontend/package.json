@@ -1,0 +1,20 @@
+{
+  "name": "codebase-cartographer-ui-frontend",
+  "version": "1.0.0",
+  "description": "Web UI for Codebase Cartographer & Code Review Tools",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "preview": "open index.html"
+  },
+  "keywords": [
+    "codebase-analysis",
+    "code-review",
+    "cartographer",
+    "claude-agent-sdk"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}
