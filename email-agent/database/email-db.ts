@@ -86,6 +86,7 @@ export class EmailDatabase {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         message_id TEXT UNIQUE NOT NULL,
         thread_id TEXT,
+        imap_uid INTEGER,
         in_reply_to TEXT,
         email_references TEXT,
         date_sent DATETIME NOT NULL,
