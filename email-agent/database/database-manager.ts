@@ -99,9 +99,9 @@ export class DatabaseManager {
         subject TEXT,
         fromAddress TEXT NOT NULL,
         fromName TEXT,
-        toAddresses TEXT,
-        ccAddresses TEXT,
-        bccAddresses TEXT,
+        to_addresses TEXT,
+        cc_addresses TEXT,
+        bcc_addresses TEXT,
         replyTo TEXT,
         bodyText TEXT,
         bodyHtml TEXT,
@@ -146,8 +146,8 @@ export class DatabaseManager {
         fromAddress,
         fromName,
         bodyText,
-        toAddresses,
-        ccAddresses,
+        to_addresses,
+        cc_addresses,
         attachment_names,
         tokenize = 'porter unicode61'
       )
@@ -177,11 +177,11 @@ export class DatabaseManager {
       BEGIN
         INSERT INTO emails_fts(
           messageId, subject, fromAddress, fromName, bodyText,
-          toAddresses, ccAddresses
+          to_addresses, cc_addresses
         )
         VALUES (
           NEW.messageId, NEW.subject, NEW.fromAddress, NEW.fromName,
-          NEW.bodyText, NEW.toAddresses, NEW.ccAddresses
+          NEW.bodyText, NEW.to_addresses, NEW.cc_addresses
         );
       END
     `);
