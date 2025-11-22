@@ -25,6 +25,13 @@ A multi-agent research system that coordinates specialized subagents to research
 - Synthesizes findings into detailed reports
 - Demonstrates detailed subagent activity tracking
 
+### 🛠️ [cldash](./cldash)
+Utility library for Claude Code agent workflows - composable primitives for predictable, debuggable agentic coding:
+- Structured command execution with `exec()`
+- Explicit verification with `assert()`
+- Resilient operations with `retry()`
+- Workflow composition with `pipe()`
+
 ## Quick Start
 
 Each demo has its own directory with dedicated setup instructions. Navigate to the specific demo folder and follow its README for setup and usage details.
