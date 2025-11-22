@@ -1,0 +1,91 @@
+{
+  "example_id": "001-commonjs-to-esm-simple",
+  "category": "module_system",
+  "repository": {
+    "name": "string-utils-example",
+    "url": "synthetic-example",
+    "size_loc": 100
+  },
+  "migration": {
+    "type": "commonjs_to_esm",
+    "description": "Convert simple CommonJS utility library to ESM",
+    "files_affected": 5,
+    "complexity": "low"
+  },
+  "execution": {
+    "timestamp": "2025-11-22T18:29:30.236Z",
+    "duration_ms": 101,
+    "dry_run_duration_ms": 50,
+    "concurrency": 1,
+    "steps": [
+      {
+        "phase": "gather_context",
+        "operations": [
+          "read_package_json",
+          "scan_js_files",
+          "analyze_patterns"
+        ],
+        "duration_ms": 6
+      },
+      {
+        "phase": "action",
+        "operations": [
+          "migrate_files",
+          "update_package_json"
+        ],
+        "duration_ms": 6
+      },
+      {
+        "phase": "verify",
+        "operations": [
+          "run_tests",
+          "verify_transformations",
+          "calculate_diff"
+        ],
+        "duration_ms": 88
+      }
+    ]
+  },
+  "results": {
+    "success": true,
+    "tests_passed": true,
+    "lint_passed": true,
+    "runtime_verified": true,
+    "manual_review_score": 5
+  },
+  "metrics": {
+    "files_processed": 5,
+    "files_successful": 5,
+    "files_failed": 0,
+    "lines_changed": 0,
+    "avg_time_per_file_ms": 20.2,
+    "retry_count": 0,
+    "rollback_count": 0
+  },
+  "quality": {
+    "diff_quality_score": 5,
+    "style_preserved": true,
+    "breaking_changes": [],
+    "warnings": []
+  },
+  "agent_loop_analysis": {
+    "total_llm_calls": 0,
+    "context_tokens": 0,
+    "output_tokens": 0,
+    "tool_calls": 8,
+    "error_recovery_attempts": 0
+  },
+  "learning_signals": {
+    "success_factors": [
+      "Simple, well-structured CommonJS code",
+      "No circular dependencies",
+      "Complete test coverage",
+      "Clear separation of concerns"
+    ],
+    "failure_factors": [],
+    "optimization_opportunities": [
+      "Could parallelize file transformations",
+      "Could add automated .js extension detection"
+    ]
+  }
+}
