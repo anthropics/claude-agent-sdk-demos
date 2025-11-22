@@ -1,0 +1,43 @@
+# DBOS Configuration
+# See: https://docs.dbos.dev/configuration
+
+name: dbos-claude-integration
+
+language: python
+
+# Database configuration
+database:
+  hostname: ${PGHOST:-localhost}
+  port: ${PGPORT:-5432}
+  username: ${PGUSER:-postgres}
+  password: ${PGPASSWORD}
+  app_db_name: dbos_claude_demo
+  sys_db_name: dbos_sys
+  app_db_timeout: 30
+  connection_pool_size: 10
+
+# Runtime configuration
+runtimeConfig:
+  # Start the DBOS HTTP server
+  start_http_server: true
+  port: 8000
+
+# Environment variables
+env:
+  ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+
+# Telemetry (optional)
+telemetry:
+  logs:
+    console:
+      enabled: true
+      level: info
+    file:
+      enabled: false
+
+# HTTP endpoints (optional - for exposing workflows as HTTP endpoints)
+# endpoints:
+#   - path: /api/ask
+#     workflow: ask_claude_workflow
+#   - path: /api/research
+#     workflow: research_workflow
