@@ -15,3 +15,18 @@ export { retry, retryWithResult, RetryError } from './retry';
 export type { RetryOptions, RetryResult } from './retry';
 
 export { pipe, pipeAsync, pipeDebug } from './pipe';
+
+export { parallel, parallelWithRetry, parallelMap, parallelFilter } from './parallel';
+export type { ParallelOptions, ParallelResult } from './parallel';
+
+export {
+  transaction,
+  transactionStep,
+  fileTransaction,
+  fileTransactions,
+} from './transaction';
+export type {
+  TransactionStep,
+  TransactionOptions,
+  TransactionResult,
+} from './transaction';

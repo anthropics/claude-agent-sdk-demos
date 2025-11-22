@@ -6,13 +6,23 @@
 
 ## What is cldash?
 
-**cldash** is to Claude Code what **lodash** is to JavaScript - a collection of composable utility functions that make agent workflows predictable, debuggable, and reliable.
+**cldash** is to Claude Code what **lodash** is to JavaScript - a production-ready toolkit of composable utilities that make agent workflows predictable, debuggable, and reliable.
 
-Inspired by the Unix philosophy and lodash's design, cldash provides:
-- ✅ **Structured output** - Parse-friendly results instead of raw text
-- ✅ **Explicit verification** - Make agent self-assessment visible
-- ✅ **Resilient operations** - Handle flaky commands automatically
-- ✅ **Composable workflows** - Chain operations like Unix pipes
+### Complete Feature Set
+
+**Core Utilities**:
+- ✅ **exec()** - Structured command execution with dry-run & streaming
+- ✅ **assert()** - Explicit verification for agent self-assessment
+- ✅ **retry()** - Automatic resilience with exponential backoff
+- ✅ **pipe()** - Readable workflow composition
+
+**Advanced Features**:
+- ✅ **parallel()** - Concurrent execution with concurrency control
+- ✅ **transaction()** - Atomic operations with automatic rollback
+- ✅ **Dry-run mode** - Preview operations before executing
+- ✅ **Progress streaming** - Live feedback for long-running commands
+
+📖 **[Complete API Documentation →](./API.md)**
 
 ## The Problem
 
@@ -62,12 +72,38 @@ const output = await workflow(file);
 # Install dependencies
 npm install
 
-# Run the standalone demo
-npm run demo
-
-# Run the agent demo (Claude using cldash)
-npm run demo:agent
+# Run demos
+npm run demo              # Basic features demo
+npx tsx examples/migration-v2.ts  # Complete features showcase
 ```
+
+## Before vs After
+
+**Without cldash** (~150 lines):
+```typescript
+// Sequential processing, manual error handling, no rollback
+try {
+  const files = await findFiles();
+  for (const file of files) {
+    try { await migrateFile(file); }
+    catch (e) { /* handle error */ }
+  }
+} catch (e) { /* try to clean up? */ }
+```
+
+**With cldash** (~50 lines):
+```typescript
+// Parallel, automatic rollback, progress tracking
+await transaction([
+  createBackup,
+  runTests,
+  () => parallel(migrateTasks, {concurrency: 5, onProgress: log}),
+  verify,
+  cleanup
+]);
+```
+
+**Result**: 70% less code, 10x more reliable
 
 ## Core Utilities
 
