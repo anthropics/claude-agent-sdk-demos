@@ -1,0 +1,131 @@
+{
+  "generated": "2025-11-22T18:50:00.000Z",
+  "total_repositories": 7,
+  "purpose": "Real-world repositories for testing moment.js → Day.js migration with cldash",
+  "repositories": [
+    {
+      "name": "ecommerce-react",
+      "owner": "jgudo",
+      "full_name": "jgudo/ecommerce-react",
+      "url": "https://github.com/jgudo/ecommerce-react",
+      "stars": 750,
+      "description": "Simple ecommerce React application",
+      "moment_version": "^2.29.1",
+      "has_tests": true,
+      "category": "ecommerce",
+      "complexity": "medium",
+      "notes": "Most recent moment version, good test case for modern codebase"
+    },
+    {
+      "name": "sound-redux",
+      "owner": "andrewngu",
+      "full_name": "andrewngu/sound-redux",
+      "url": "https://github.com/andrewngu/sound-redux",
+      "stars": 4998,
+      "description": "A Soundcloud client built with React / Redux",
+      "moment_version": "^2.19.3",
+      "has_tests": false,
+      "category": "media_app",
+      "complexity": "medium",
+      "notes": "Large popular project, tests migration without test suite"
+    },
+    {
+      "name": "react-datetime",
+      "owner": "arqex",
+      "full_name": "arqex/react-datetime",
+      "url": "https://github.com/arqex/react-datetime",
+      "stars": 2013,
+      "description": "A lightweight but complete datetime picker react component",
+      "moment_version": "^2.16.0",
+      "has_tests": true,
+      "test_command": "jest",
+      "category": "ui_component",
+      "complexity": "low",
+      "notes": "Heavy moment usage in date picker component, has Jest tests"
+    },
+    {
+      "name": "input-moment",
+      "owner": "wangzuo",
+      "full_name": "wangzuo/input-moment",
+      "url": "https://github.com/wangzuo/input-moment",
+      "stars": 520,
+      "description": "React datetime picker powered by momentjs",
+      "moment_version": "^2.17.1",
+      "has_tests": true,
+      "test_command": "jest",
+      "category": "ui_component",
+      "complexity": "low",
+      "notes": "Small, focused component - good candidate for clean migration"
+    },
+    {
+      "name": "rome",
+      "owner": "bevacqua",
+      "full_name": "bevacqua/rome",
+      "url": "https://github.com/bevacqua/rome",
+      "stars": 2911,
+      "description": "Customizable date (and time) picker. Opt-in UI, no jQuery!",
+      "moment_version": "^2.8.2",
+      "has_tests": false,
+      "category": "ui_component",
+      "complexity": "medium",
+      "notes": "Older moment version, interesting migration challenge"
+    },
+    {
+      "name": "CLNDR",
+      "owner": "kylestetz",
+      "full_name": "kylestetz/CLNDR",
+      "url": "https://github.com/kylestetz/CLNDR",
+      "stars": 2865,
+      "description": "a jQuery calendar plugin that uses HTML templates",
+      "moment_version": ">=2.8.3",
+      "has_tests": false,
+      "category": "ui_component",
+      "complexity": "medium",
+      "notes": "jQuery-based calendar with version range requirement"
+    },
+    {
+      "name": "keystone-classic",
+      "owner": "keystonejs",
+      "full_name": "keystonejs/keystone-classic",
+      "url": "https://github.com/keystonejs/keystone-classic",
+      "stars": 14500,
+      "description": "Node.js CMS and web app framework",
+      "moment_version": "^2.24.0",
+      "has_tests": true,
+      "category": "cms_framework",
+      "complexity": "high",
+      "notes": "Large CMS framework, complex codebase - excellent stress test"
+    }
+  ],
+  "summary": {
+    "by_category": {
+      "ui_component": 4,
+      "ecommerce": 1,
+      "media_app": 1,
+      "cms_framework": 1
+    },
+    "by_complexity": {
+      "low": 2,
+      "medium": 4,
+      "high": 1
+    },
+    "with_tests": 4,
+    "without_tests": 3,
+    "moment_versions": {
+      "^2.29.1": 1,
+      "^2.24.0": 1,
+      "^2.19.3": 1,
+      "^2.17.1": 1,
+      "^2.16.0": 1,
+      "^2.8.2": 1,
+      ">=2.8.3": 1
+    }
+  },
+  "next_steps": [
+    "Clone each repository to golden-dataset/",
+    "Run migration script on each",
+    "Collect metrics: success rate, bundle size reduction, test passage",
+    "Document edge cases and failures",
+    "Generate aggregate report for PR"
+  ]
+}

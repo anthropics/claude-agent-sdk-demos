@@ -1,0 +1,12 @@
+{
+  "name": "string-utils-example",
+  "version": "1.0.0",
+  "description": "Simple string utility library for migration demo",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["string", "utilities", "demo"],
+  "author": "Demo",
+  "license": "MIT"
+}

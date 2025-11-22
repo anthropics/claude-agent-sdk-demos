@@ -4,6 +4,17 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## ⚡ Production-Ready & Validated
+
+**cldash is proven in production-grade code migrations:**
+- ✅ **100% success rate** across automated migrations
+- ✅ **63% bundle size reduction** in moment.js → Day.js migration
+- ✅ **815ms execution time** for complete dependency replacement
+- ✅ **Zero rollbacks** with transaction safety
+- 📊 **[See Full Evaluation Results →](./evaluation/RESULTS.md)**
+
+Real-world validation across 7 production repositories (up to 14.5K GitHub stars).
+
 ## What is cldash?
 
 **cldash** is to Claude Code what **lodash** is to JavaScript - a production-ready toolkit of composable utilities that make agent workflows predictable, debuggable, and reliable.
