@@ -1,0 +1,22 @@
+{
+  "name": "sms-response-assistant",
+  "version": "1.0.0",
+  "description": "SMS Response Assistant powered by Claude Code SDK",
+  "main": "server/index.ts",
+  "scripts": {
+    "dev": "bun run server/index.ts",
+    "start": "bun run server/index.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^1.0.120",
+    "dotenv": "^17.2.1",
+    "sqlite3": "^5.1.7",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.21",
+    "@types/node": "^24.5.1",
+    "typescript": "^5.9.2"
+  }
+}

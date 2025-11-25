@@ -2,7 +2,21 @@
 
 A multi-agent research system that coordinates specialized subagents to research any topic and generate comprehensive reports.
 
+**Two modes available:**
+- **Traditional Mode**: Deep exploration of complex topics
+- **Wide Research Mode**: Analyzing lists of items with equal quality guarantee
+
+**Document processing skills:**
+- 📊 **Excel (.xlsx)** - Create spreadsheets with formulas and formatting
+- 📄 **Word (.docx)** - Generate professional documents
+- 📑 **PDF** - Extract, create, and fill PDF forms
+- 📊 **PowerPoint (.pptx)** - Build presentations with layouts and charts
+
+**[📖 Skills Setup Guide →](SKILLS_SETUP.md)**
+
 ## Quick Start
+
+### Traditional Research Mode
 
 ```bash
 # Install dependencies
@@ -17,18 +31,51 @@ uv run research_agent/agent.py
 
 Then ask: "Research quantum computing developments in 2025"
 
+### Wide Research Mode
+
+```bash
+# Run Wide Research mode
+uv run research_agent/agent_wide.py
+```
+
+Then ask: "Research Apple, Microsoft, Google, and Amazon"
+
+**[📖 Full Wide Research Documentation →](WIDE_RESEARCH.md)**
+
 ## How It Works
 
+### Traditional Mode
 1. **Lead agent** breaks your request into 2-4 subtopics
 2. Spawns **researcher subagents in parallel** to search the web
 3. Each researcher saves findings to `files/research_notes/`
 4. Spawns **report-writer** to create final report in `files/reports/`
 
+### Wide Research Mode
+1. **Lead agent** parses list of items from your request
+2. Spawns **ONE researcher per item** (all in parallel)
+3. Each researcher investigates their assigned item with equal depth
+4. Spawns **report-writer** to aggregate all findings + comparative analysis
+
 ## Example Queries
 
+### Traditional Mode Examples
 - "Research quantum computing developments"
 - "What are current trends in renewable energy?"
 - "Research the Detroit Lions 2025 season"
+
+### Wide Research Mode Examples
+- "Research Apple, Microsoft, Google, and Amazon"
+- "Compare quantum computing at IBM, Google, and Microsoft"
+- "Analyze these SaaS companies: Salesforce, HubSpot, Zendesk"
+
+## When to Use Each Mode
+
+| Use Traditional Mode When | Use Wide Research Mode When |
+|---------------------------|------------------------------|
+| Researching a single topic | Analyzing a list of items |
+| Need subtopic decomposition | Need equal quality across items |
+| Want integrated synthesis | Want comparative analysis |
+| Deep dive on one subject | Research 5-100+ similar entities |
 
 ## Agents
 

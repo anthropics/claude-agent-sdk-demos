@@ -1,0 +1,35 @@
+[project]
+name = "sms-response-assistant"
+version = "1.0.0"
+description = "SMS Response Assistant powered by Claude Code SDK"
+authors = [{name = "Terragon Labs", email = "info@terragonlabs.com"}]
+requires-python = ">=3.10"
+dependencies = [
+    "claude-code-sdk>=1.0.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "anyio>=4.0.0",
+    "httpx>=0.25.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
