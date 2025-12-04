@@ -1,0 +1,123 @@
+{
+  "example_id": "013-moment-to-dayjs",
+  "category": "api_replacement",
+  "repository": {
+    "name": "event-scheduler-app",
+    "url": "synthetic-example",
+    "size_loc": 350
+  },
+  "migration": {
+    "type": "moment_to_dayjs",
+    "description": "Replace deprecated moment.js with modern day.js for bundle size reduction and maintenance",
+    "files_affected": 5,
+    "complexity": "medium"
+  },
+  "execution": {
+    "timestamp": "2025-11-22T18:36:28.454Z",
+    "duration_ms": 815,
+    "dry_run_duration_ms": 50,
+    "concurrency": 1,
+    "steps": [
+      {
+        "phase": "gather_context",
+        "operations": [
+          "read_package_json",
+          "measure_bundle_size",
+          "scan_source_files",
+          "analyze_moment_usage"
+        ],
+        "duration_ms": 30
+      },
+      {
+        "phase": "action",
+        "operations": [
+          "migrate_files",
+          "update_dependencies",
+          "install_dayjs"
+        ],
+        "duration_ms": 513
+      },
+      {
+        "phase": "verify",
+        "operations": [
+          "run_tests",
+          "verify_no_moment_remaining",
+          "measure_new_bundle_size"
+        ],
+        "duration_ms": 272
+      }
+    ]
+  },
+  "results": {
+    "success": true,
+    "tests_passed": true,
+    "lint_passed": true,
+    "runtime_verified": true,
+    "manual_review_score": 5
+  },
+  "metrics": {
+    "files_processed": 5,
+    "files_successful": 5,
+    "files_failed": 0,
+    "lines_changed": 0,
+    "avg_time_per_file_ms": 163,
+    "retry_count": 0,
+    "rollback_count": 0
+  },
+  "quality": {
+    "diff_quality_score": 5,
+    "style_preserved": true,
+    "breaking_changes": [],
+    "warnings": []
+  },
+  "agent_loop_analysis": {
+    "total_llm_calls": 0,
+    "context_tokens": 0,
+    "output_tokens": 0,
+    "tool_calls": 10,
+    "error_recovery_attempts": 0
+  },
+  "moment_usage_patterns": {
+    "imports": 3,
+    "format": 7,
+    "diff": 2,
+    "fromNow": 2,
+    "add": 3,
+    "isBetween": 3,
+    "startOf": 2,
+    "endOf": 2,
+    "isAfter": 1,
+    "isBefore": 1,
+    "isSameOrAfter": 1,
+    "isSameOrBefore": 1,
+    "toDate": 5,
+    "toISOString": 4,
+    "isValid": 1
+  },
+  "bundle_size_impact": {
+    "before_kb": 5348,
+    "after_kb": 1968,
+    "reduction_kb": 3380,
+    "reduction_percent": 63
+  },
+  "business_value": {
+    "bundle_size_reduction": "63%",
+    "deprecated_dependency_removed": true,
+    "performance_improvement": "Expected faster load times",
+    "maintenance_benefit": "Active library vs deprecated"
+  },
+  "learning_signals": {
+    "success_factors": [
+      "API compatibility between moment and dayjs",
+      "Comprehensive test coverage catches issues",
+      "Plugin system for extended features",
+      "Clear migration path with measurable benefits"
+    ],
+    "failure_factors": [],
+    "optimization_opportunities": [
+      "Could parallelize file transformations",
+      "Could detect and optimize plugin usage",
+      "Could validate API compatibility before migration"
+    ]
+  }
+}

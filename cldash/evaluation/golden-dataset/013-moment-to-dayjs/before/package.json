@@ -1,0 +1,17 @@
+{
+  "name": "event-scheduler-app",
+  "version": "2.1.0",
+  "description": "Event scheduling application - demonstrates real-world moment.js usage",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node test.js",
+    "start": "node src/index.js"
+  },
+  "keywords": ["events", "scheduling", "calendar"],
+  "author": "Demo",
+  "license": "MIT",
+  "dependencies": {
+    "moment": "^2.29.4"
+  }
+}
