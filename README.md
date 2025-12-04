@@ -18,12 +18,29 @@ Demonstrations of working with spreadsheets and Excel files using Claude.
 ### 👋 [Hello World](./hello-world)
 A simple getting-started example to help you understand the basics of the Claude Agent SDK.
 
+### 📱 [SMS Agent (Python)](./sms-agent-python)
+SMS assistant that processes text messages using Claude:
+- Webhook integration with SMS providers
+- FastAPI backend with background task processing
+- SQLite database for conversation persistence
+- Demonstrates async handling in web applications
+
+### 📱 [SMS Agent (TypeScript)](./sms-agent)
+TypeScript version of the SMS assistant with similar capabilities.
+
 ### 🔬 [Research Agent](./research-agent)
 A multi-agent research system that coordinates specialized subagents to research topics and generate comprehensive reports:
 - Breaks research requests into subtopics
 - Spawns parallel researcher agents to search the web
 - Synthesizes findings into detailed reports
 - Demonstrates detailed subagent activity tracking
+
+### 🗄️ [DBOS Integration](./dbos-integration)
+**NEW!** Advanced integration example showing how to combine [DBOS](https://docs.dbos.dev/) workflows with Claude Agent SDK:
+- Handles async/await event loop integration
+- Solves the streaming checkpoint challenge
+- Demonstrates durable workflow patterns
+- Production-ready architecture for reliable AI applications
 
 ## Quick Start
 

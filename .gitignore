@@ -1,4 +1,5 @@
 .claude
+!research-agent/.claude/
 .db
 .DS_Store
 .github

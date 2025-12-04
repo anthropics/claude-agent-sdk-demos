@@ -8,6 +8,10 @@ dependencies = [
     "python-dotenv>=1.0.0",
 ]
 
+[project.scripts]
+research-agent = "research_agent.agent:chat"
+research-agent-wide = "research_agent.agent_wide:chat"
+
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
