@@ -43,6 +43,7 @@ async def chat():
     # Load prompts
     lead_agent_prompt = load_prompt("lead_agent.txt")
     researcher_prompt = load_prompt("researcher.txt")
+    data_analyst_prompt = load_prompt("data_analyst.txt")
     report_writer_prompt = load_prompt("report_writer.txt")
 
     # Initialize subagent tracker with transcript writer and session directory
@@ -62,15 +63,28 @@ async def chat():
             prompt=researcher_prompt,
             model="haiku"
         ),
+        "data-analyst": AgentDefinition(
+            description=(
+                "Use this agent AFTER researchers have completed their work to generate quantitative "
+                "analysis and visualizations. The data-analyst reads research notes from files/research_notes/, "
+                "extracts numerical data (percentages, rankings, trends, comparisons), and generates "
+                "charts using Python/matplotlib via Bash. Saves charts to files/charts/ and writes "
+                "a data summary to files/data/. Use this before the report-writer to add visual insights."
+            ),
+            tools=["Glob", "Read", "Bash", "Write"],
+            prompt=data_analyst_prompt,
+            model="haiku"
+        ),
         "report-writer": AgentDefinition(
             description=(
                 "Use this agent when you need to create a formal research report document. "
-                "The report-writer reads research findings from files/research_notes/ and synthesizes "
-                "them into clear, concise, professionally formatted reports in files/reports/. "
-                "Ideal for creating structured documents with proper citations and organization. "
-                "Does NOT conduct web searches - only reads existing research notes and creates reports."
+                "The report-writer reads research findings from files/research_notes/, data analysis "
+                "from files/data/, and charts from files/charts/, then synthesizes them into clear, "
+                "concise, professionally formatted PDF reports in files/reports/ using reportlab. "
+                "Ideal for creating structured documents with proper citations, data, and embedded visuals. "
+                "Does NOT conduct web searches - only reads existing research notes and creates PDF reports."
             ),
-            tools=["Skill", "Write", "Glob", "Read"],
+            tools=["Skill", "Write", "Glob", "Read", "Bash"],
             prompt=report_writer_prompt,
             model="haiku"
         )
@@ -102,12 +116,12 @@ async def chat():
         model="haiku"
     )
 
-    print("\n=== Research Agent ===")
-    print("Ask me to research any topic, gather information, or analyze documents.")
-    print("I can delegate complex tasks to specialized researcher and report-writer agents.")
-    print(f"\nRegistered subagents: {', '.join(agents.keys())}")
-    print(f"Session logs: {session_dir}")
-    print("Type 'exit' or 'quit' to end.\n")
+    print("\n" + "=" * 50)
+    print("  Research Agent")
+    print("=" * 50)
+    print("\nResearch any topic and get a comprehensive PDF")
+    print("report with data visualizations.")
+    print("\nType 'exit' to quit.\n")
 
     try:
         async with ClaudeSDKClient(options=options) as client:

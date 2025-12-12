@@ -1,0 +1,21 @@
+PDF Processing Skill License
+
+Copyright (c) 2024
+
+Permission is hereby granted to use this skill for PDF processing operations
+within the research agent framework.
+
+This skill is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement.
+
+The skill relies on the following open-source libraries:
+- pypdf (BSD License)
+- pdfplumber (MIT License)
+- pypdfium2 (Apache/BSD License)
+- reportlab (BSD License)
+- poppler-utils (GPL-2 License)
+- qpdf (Apache License)
+
+Users are responsible for ensuring compliance with the respective licenses
+of these dependencies.

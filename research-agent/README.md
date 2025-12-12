@@ -1,6 +1,6 @@
 # Multi-Agent Research System
 
-A multi-agent research system that coordinates specialized subagents to research any topic and generate comprehensive reports.
+A multi-agent research system that coordinates specialized subagents to research any topic and generate comprehensive PDF reports with data visualizations.
 
 ## Quick Start
 
@@ -12,80 +12,99 @@ uv sync
 export ANTHROPIC_API_KEY="your-api-key"
 
 # Run the agent
-uv run research_agent/agent.py
+uv run python research_agent/agent.py
 ```
 
 Then ask: "Research quantum computing developments in 2025"
 
 ## How It Works
 
-1. **Lead agent** breaks your request into 2-4 subtopics
-2. Spawns **researcher subagents in parallel** to search the web
-3. Each researcher saves findings to `files/research_notes/`
-4. Spawns **report-writer** to create final report in `files/reports/`
+1. **Lead Agent** breaks your request into 2-4 subtopics
+2. Spawns **Researcher** subagents in parallel to search the web
+3. Each Researcher saves findings to `files/research_notes/`
+4. Spawns **Data Analyst** to extract metrics and generate charts in `files/charts/`
+5. Spawns **Report Writer** to create final PDF report in `files/reports/`
+
+## Agents
+
+| Agent | Tools | Purpose |
+|-------|-------|---------|
+| **Lead Agent** | `Task` | Coordinates research, delegates to subagents |
+| **Researcher** | `WebSearch`, `Write` | Gathers information from the web |
+| **Data Analyst** | `Glob`, `Read`, `Bash`, `Write` | Extracts metrics, generates charts |
+| **Report Writer** | `Skill`, `Write`, `Glob`, `Read`, `Bash` | Creates PDF reports with embedded visuals |
+
+## Slash Commands
+
+| Command | Description |
+|---------|-------------|
+| `/research <topic>` | Start focused research on any topic |
+| `/competitive-analysis <company>` | Analyze companies or products |
+| `/market-trends <industry>` | Research industry trends |
+| `/fact-check <claim>` | Verify claims and statements |
+| `/summarize` | Summarize all current research findings |
 
 ## Example Queries
 
 - "Research quantum computing developments"
 - "What are current trends in renewable energy?"
-- "Research the Detroit Lions 2025 season"
+- `/competitive-analysis Tesla`
+- `/market-trends artificial intelligence`
 
-## Agents
+## Output Structure
 
-**Lead Agent** - Coordinates everything, only uses `Task` tool
-**Researcher Agents** - Use `WebSearch` and `Write` to gather information
-**Report-Writer Agent** - Uses `Read`, `Glob`, `Write` to synthesize findings
+```
+files/
+├── research_notes/     # Markdown files from researchers
+├── data/               # Data summaries from analyst
+├── charts/             # PNG visualizations
+└── reports/            # Final PDF reports
+
+logs/
+└── session_YYYYMMDD_HHMMSS/
+    ├── transcript.txt      # Human-readable conversation
+    └── tool_calls.jsonl    # Structured tool usage log
+```
 
 ## Subagent Tracking with Hooks
 
-The system includes comprehensive tracking of all tool calls using **SDK hooks**. Every time any agent uses a tool, it's automatically logged.
+The system tracks all tool calls using SDK hooks.
 
 ### What Gets Tracked
 
-- **Who**: Which agent (RESEARCHER-1, RESEARCHER-2, etc.)
-- **What**: Tool name (WebSearch, Write, Read, etc.)
-- **When**: Timestamp of call
-- **Input**: Parameters passed to the tool
-- **Output**: Success/failure and result size
+- **Who**: Which agent (RESEARCHER-1, DATA-ANALYST-1, etc.)
+- **What**: Tool name (WebSearch, Write, Bash, etc.)
+- **When**: Timestamp
+- **Input/Output**: Parameters and results
 
 ### How It Works
 
-**Hooks** intercept every tool call before and after execution:
+Hooks intercept every tool call before and after execution:
 
 ```python
-hooks = {
-    'PreToolUse': [HookMatcher(hooks=[tracker.pre_tool_use_hook])],
-    'PostToolUse': [HookMatcher(hooks=[tracker.post_tool_use_hook])]
-}
+hooks = Hooks(
+    pre_tool_use=[tracker.pre_tool_use_hook],
+    post_tool_use=[tracker.post_tool_use_hook]
+)
 ```
 
-**parent_tool_use_id** links tool calls to their subagent:
-- When lead agent spawns a researcher via `Task` tool → gets ID "task_123"
-- All messages from that researcher include `parent_tool_use_id = "task_123"`
-- Hooks use this ID to look up which subagent made the call
+The `parent_tool_use_id` links tool calls to their subagent:
+- Lead Agent spawns a Researcher via `Task` tool → gets ID "task_123"
+- All tool calls from that Researcher include `parent_tool_use_id = "task_123"`
+- Hooks use this ID to identify which subagent made the call
 
-### Output Logs
+### Log Output
 
-Each session creates timestamped logs in `logs/session_YYYYMMDD_HHMMSS/`:
-
-**transcript.txt** - Human-readable conversation with tool details:
+**transcript.txt** - Human-readable:
 ```
 [RESEARCHER-1] → WebSearch
     Input: query='quantum computing 2025'
-[RESEARCHER-1] → Write
-    Input: file='quantum_hardware.md' (1234 chars)
+[DATA-ANALYST-1] → Bash
+    Input: python matplotlib chart generation
 ```
 
-**tool_calls.jsonl** - Structured JSON for analysis:
+**tool_calls.jsonl** - Structured JSON:
 ```json
 {"event":"tool_call_start","agent_id":"RESEARCHER-1","tool_name":"WebSearch",...}
 {"event":"tool_call_complete","success":true,"output_size":15234}
 ```
-
-### Key Files
-
-- `agent.py` - Main entry point, registers hooks
-- `utils/subagent_tracker.py` - Hook implementation
-- `utils/message_handler.py` - Extracts parent_tool_use_id
-- `prompts/` - Agent instructions
-
