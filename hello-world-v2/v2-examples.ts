@@ -39,7 +39,7 @@ async function basicSession() {
   await using session = unstable_v2_createSession({ model: 'sonnet' });
   await session.send('Hello! Introduce yourself in one sentence.');
 
-  for await (const msg of session.receive()) {
+  for await (const msg of session.stream()) {
     if (msg.type === 'assistant') {
       const text = msg.message.content.find((c): c is { type: 'text'; text: string } => c.type === 'text');
       console.log(`Claude: ${text?.text}`);
@@ -55,7 +55,7 @@ async function multiTurn() {
 
   // Turn 1
   await session.send('What is 5 + 3? Just the number.');
-  for await (const msg of session.receive()) {
+  for await (const msg of session.stream()) {
     if (msg.type === 'assistant') {
       const text = msg.message.content.find((c): c is { type: 'text'; text: string } => c.type === 'text');
       console.log(`Turn 1: ${text?.text}`);
@@ -64,7 +64,7 @@ async function multiTurn() {
 
   // Turn 2 - Claude remembers context
   await session.send('Multiply that by 2. Just the number.');
-  for await (const msg of session.receive()) {
+  for await (const msg of session.stream()) {
     if (msg.type === 'assistant') {
       const text = msg.message.content.find((c): c is { type: 'text'; text: string } => c.type === 'text');
       console.log(`Turn 2: ${text?.text}`);
@@ -96,7 +96,7 @@ async function sessionResume() {
     console.log('[Session 1] Telling Claude my favorite color...');
     await session.send('My favorite color is blue. Remember this!');
 
-    for await (const msg of session.receive()) {
+    for await (const msg of session.stream()) {
       if (msg.type === 'system' && msg.subtype === 'init') {
         sessionId = msg.session_id;
         console.log(`[Session 1] ID: ${sessionId}`);
@@ -116,7 +116,7 @@ async function sessionResume() {
     console.log('[Session 2] Resuming and asking Claude...');
     await session.send('What is my favorite color?');
 
-    for await (const msg of session.receive()) {
+    for await (const msg of session.stream()) {
       if (msg.type === 'assistant') {
         const text = msg.message.content.find((c): c is { type: 'text'; text: string } => c.type === 'text');
         console.log(`[Session 2] Claude: ${text?.text}`);
