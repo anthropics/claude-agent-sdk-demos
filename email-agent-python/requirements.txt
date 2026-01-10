@@ -1,0 +1,15 @@
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+websockets==12.0
+anthropic==0.18.1
+python-dotenv==1.0.0
+sqlalchemy==2.0.25
+aiosqlite==0.19.0
+pydantic==2.5.3
+pydantic-settings==2.1.0
+email-validator==2.1.0
+imap-tools==1.5.0
+aioimaplib==1.0.1
+mailparser==4.2.0
+python-multipart==0.0.6
+watchdog==4.0.0
