@@ -1,0 +1,33 @@
+{
+  "name": "cldash",
+  "version": "0.1.0",
+  "description": "Utility library for Claude Code agent workflows - composable primitives for predictable, debuggable agentic coding",
+  "main": "lib/index.ts",
+  "scripts": {
+    "demo": "tsx demo.ts",
+    "demo:agent": "tsx agent-demo.ts",
+    "build": "tsc",
+    "test": "echo \"Tests coming soon\" && exit 0"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "agent",
+    "agentic",
+    "workflow",
+    "utilities",
+    "lodash",
+    "composition"
+  ],
+  "author": "Jai (ChaiWithJai)",
+  "license": "MIT",
+  "devDependencies": {
+    "@anthropic-ai/claude-agent-sdk": "latest",
+    "@types/node": "^20.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "glob": "^13.0.0"
+  }
+}
