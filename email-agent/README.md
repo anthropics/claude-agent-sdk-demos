@@ -42,7 +42,9 @@ cp .env.example .env
 
 4. Configure your credentials in `.env` (see IMAP Setup below)
 
-5. Run the application:
+5. Set up the database. See [the database migrations README](./database/migrations/README.md) for options.
+
+6. Run the application:
 ```bash
 bun run dev
 # or npm run dev
