@@ -91,6 +91,7 @@ export class DatabaseManager {
       CREATE TABLE IF NOT EXISTS emails (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         messageId TEXT UNIQUE NOT NULL,
+        imapUid INTEGER,
         threadId TEXT,
         inReplyTo TEXT,
         emailReferences TEXT,
@@ -99,9 +100,9 @@ export class DatabaseManager {
         subject TEXT,
         fromAddress TEXT NOT NULL,
         fromName TEXT,
-        toAddresses TEXT,
-        ccAddresses TEXT,
-        bccAddresses TEXT,
+        to_addresses TEXT,
+        cc_addresses TEXT,
+        bcc_addresses TEXT,
         replyTo TEXT,
         bodyText TEXT,
         bodyHtml TEXT,
@@ -146,8 +147,8 @@ export class DatabaseManager {
         fromAddress,
         fromName,
         bodyText,
-        toAddresses,
-        ccAddresses,
+        to_addresses,
+        cc_addresses,
         attachment_names,
         tokenize = 'porter unicode61'
       )
@@ -177,11 +178,11 @@ export class DatabaseManager {
       BEGIN
         INSERT INTO emails_fts(
           messageId, subject, fromAddress, fromName, bodyText,
-          toAddresses, ccAddresses
+          to_addresses, cc_addresses
         )
         VALUES (
           NEW.messageId, NEW.subject, NEW.fromAddress, NEW.fromName,
-          NEW.bodyText, NEW.toAddresses, NEW.ccAddresses
+          NEW.bodyText, NEW.to_addresses, NEW.cc_addresses
         );
       END
     `);
@@ -260,7 +261,7 @@ export class DatabaseManager {
   public upsertEmail(email: EmailRecord, attachments: Attachment[] = []): number {
     const upsertEmail = this.db.prepare(`
       INSERT INTO emails (
-        message_id, thread_id, in_reply_to, email_references,
+        message_id, imap_uid, thread_id, in_reply_to, email_references,
         date_sent, date_received, subject, from_address, from_name,
         to_addresses, cc_addresses, bcc_addresses, reply_to,
         body_text, body_html, snippet,
@@ -268,7 +269,7 @@ export class DatabaseManager {
         is_trash, is_spam, size_bytes, has_attachments,
         attachment_count, folder, labels, raw_headers
       ) VALUES (
-        $messageId, $threadId, $inReplyTo, $references,
+        $messageId, $imapUid, $threadId, $inReplyTo, $references,
         $dateSent, $dateReceived, $subject, $fromAddress, $fromName,
         $toAddresses, $ccAddresses, $bccAddresses, $replyTo,
         $bodyText, $bodyHtml, $snippet,
@@ -277,6 +278,7 @@ export class DatabaseManager {
         $attachmentCount, $folder, $labels, $rawHeaders
       )
       ON CONFLICT(message_id) DO UPDATE SET
+        imap_uid = excluded.imap_uid,
         thread_id = excluded.thread_id,
         in_reply_to = excluded.in_reply_to,
         email_references = excluded.email_references,
