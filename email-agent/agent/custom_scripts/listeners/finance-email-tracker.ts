@@ -3,7 +3,7 @@ import type { ListenerConfig, ListenerContext, ListenerResult, Email } from '../
 import type { FinancialDashboardState, Expense } from '../ui-states/financial-dashboard';
 
 export const config: ListenerConfig = {
-  id: 'finance_email_tracker',
+  id: 'finance-email-tracker',
   name: 'Finance Email Tracker',
   description: 'Automatically tracks expenses and income from emails (receipts, invoices, payment confirmations)',
   enabled: true,
