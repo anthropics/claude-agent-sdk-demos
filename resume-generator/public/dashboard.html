@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Seeking Dashboard - AI Resume Tailor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+  <!-- Navigation -->
+  <nav class="bg-white shadow-sm border-b">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <i class="fas fa-briefcase text-2xl text-indigo-600"></i>
+          <h1 class="text-xl font-bold text-gray-800">Job Seeking Dashboard</h1>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="extension.html" class="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-medium">
+            <i class="fas fa-puzzle-piece mr-2"></i>Chrome Extension
+          </a>
+          <button onclick="showUploadModal()" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">
+            <i class="fas fa-upload mr-2"></i>Upload Resume
+          </button>
+          <a href="index.html" class="text-gray-600 hover:text-gray-800">
+            <i class="fas fa-file-alt mr-1"></i>Manual Tailor
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mx-auto px-4 py-6">
+    <!-- Search Section -->
+    <div class="bg-white rounded-xl shadow-md p-6 mb-6">
+      <h2 class="text-lg font-bold text-gray-800 mb-4">
+        <i class="fas fa-search text-indigo-600 mr-2"></i>Search Jobs
+      </h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <input
+          id="searchKeywords"
+          type="text"
+          placeholder="Job title, keywords..."
+          class="col-span-2 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+        >
+        <input
+          id="searchLocation"
+          type="text"
+          placeholder="Location (optional)"
+          class="px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500"
+        >
+        <button
+          onclick="searchJobs()"
+          class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-semibold"
+        >
+          <i class="fas fa-search mr-2"></i>Search
+        </button>
+      </div>
+
+      <!-- Filters -->
+      <div class="mt-4 flex gap-4 flex-wrap">
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" id="filterRemote" class="rounded">
+          <span>Remote Only</span>
+        </label>
+        <select id="filterExperience" class="px-3 py-1 border rounded text-sm">
+          <option value="">Experience Level</option>
+          <option value="entry">Entry Level</option>
+          <option value="mid">Mid Level</option>
+          <option value="senior">Senior</option>
+        </select>
+        <select id="filterJobType" class="px-3 py-1 border rounded text-sm">
+          <option value="">Job Type</option>
+          <option value="fulltime">Full-time</option>
+          <option value="contract">Contract</option>
+          <option value="parttime">Part-time</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="bg-white rounded-xl shadow-md mb-6">
+      <div class="border-b">
+        <div class="flex">
+          <button onclick="switchDashboardTab('search')" id="tabSearch" class="px-6 py-3 font-medium border-b-2 border-indigo-600 text-indigo-600">
+            <i class="fas fa-search mr-2"></i>Search Results
+          </button>
+          <button onclick="switchDashboardTab('saved')" id="tabSaved" class="px-6 py-3 font-medium text-gray-600 hover:text-gray-800">
+            <i class="fas fa-heart mr-2"></i>Saved Jobs
+          </button>
+          <button onclick="switchDashboardTab('applications')" id="tabApplications" class="px-6 py-3 font-medium text-gray-600 hover:text-gray-800">
+            <i class="fas fa-paper-plane mr-2"></i>Applications
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results Tab -->
+      <div id="searchResults" class="p-6">
+        <div id="jobsContainer" class="space-y-4">
+          <div class="text-center text-gray-500 py-12">
+            <i class="fas fa-search text-4xl mb-3"></i>
+            <p>Search for jobs to get started</p>
+            <p class="text-sm mt-2">Try: "Software Engineer", "Product Manager", "Data Scientist"</p>
+          </div>
+        </div>
+
+        <div id="loadingJobs" class="hidden text-center py-12">
+          <i class="fas fa-spinner fa-spin text-4xl text-indigo-600 mb-3"></i>
+          <p class="text-gray-600">Searching jobs across platforms...</p>
+        </div>
+      </div>
+
+      <!-- Saved Jobs Tab -->
+      <div id="savedJobs" class="p-6 hidden">
+        <div id="batchAutoApplyBar" class="hidden mb-4 flex items-center justify-between bg-indigo-50 border border-indigo-200 rounded-lg px-4 py-3">
+          <span class="text-indigo-700 font-medium text-sm">
+            <i class="fas fa-robot mr-2"></i>Auto Apply All Saved Jobs
+          </span>
+          <button
+            onclick="startBatchAutoApply()"
+            class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm font-semibold"
+          >
+            <i class="fas fa-play mr-2"></i>Start Auto Apply Queue
+          </button>
+        </div>
+        <div id="savedJobsContainer" class="space-y-4">
+          <div class="text-center text-gray-500 py-12">
+            <i class="fas fa-heart text-4xl mb-3"></i>
+            <p>No saved jobs yet</p>
+            <p class="text-sm mt-2">Click the heart icon on any job to save it</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications Tab -->
+      <div id="applications" class="p-6 hidden">
+        <div id="applicationsContainer" class="space-y-4">
+          <div class="text-center text-gray-500 py-12">
+            <i class="fas fa-paper-plane text-4xl mb-3"></i>
+            <p>No applications tracked yet</p>
+            <p class="text-sm mt-2">Tailor your resume for jobs to track applications</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Resume Modal -->
+  <div id="uploadModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 max-w-md w-full mx-4">
+      <h3 class="text-xl font-bold mb-4">Upload Your Resume</h3>
+      <input
+        type="file"
+        id="dashboardResumeFile"
+        accept=".docx"
+        class="w-full px-4 py-3 border rounded-lg mb-4"
+      >
+      <div class="flex gap-3">
+        <button onclick="hideUploadModal()" class="flex-1 px-4 py-2 border rounded-lg hover:bg-gray-50">
+          Cancel
+        </button>
+        <button onclick="uploadResume()" class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+          Upload
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tailor Progress Modal -->
+  <div id="tailorModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold">
+          <i class="fas fa-magic text-indigo-600 mr-2"></i>
+          <span id="tailorModalTitle">Tailoring Resume</span>
+        </h3>
+        <span id="autoApplyBadge" class="hidden px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
+          <i class="fas fa-robot mr-1"></i>Auto Apply Mode
+        </span>
+      </div>
+      <div id="queueStatus" class="hidden mb-3 text-sm text-indigo-600 font-medium bg-indigo-50 rounded-lg px-3 py-2">
+        <i class="fas fa-list mr-1"></i><span id="queueStatusText"></span>
+      </div>
+      <div id="tailorProgress" class="space-y-2 font-mono text-sm bg-gray-50 rounded-lg p-3 max-h-48 overflow-y-auto"></div>
+      <div id="tailorResult" class="hidden mt-4 space-y-3">
+        <div class="text-green-700 font-medium text-center py-2">
+          <i class="fas fa-check-circle mr-2"></i>Ready to apply!
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <button id="downloadTailoredBtn" class="px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium">
+            <i class="fas fa-file-word mr-2"></i>Download Resume
+          </button>
+          <button id="downloadCoverLetterBtn" class="hidden px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 font-medium">
+            <i class="fas fa-envelope mr-2"></i>Download Cover Letter
+          </button>
+        </div>
+        <button id="openJobBtn" class="hidden w-full px-4 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 font-semibold">
+          <i class="fas fa-external-link-alt mr-2"></i>Open Job Posting to Apply
+        </button>
+        <button id="nextQueueBtn" class="hidden w-full px-4 py-3 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 font-semibold">
+          <i class="fas fa-arrow-right mr-2"></i>Continue to Next Job
+        </button>
+      </div>
+      <button onclick="hideTailorModal()" class="w-full mt-4 px-4 py-2 border rounded-lg hover:bg-gray-50 text-gray-600">
+        Close
+      </button>
+    </div>
+  </div>
+
+  <!-- Cover Letter Preview Modal -->
+  <div id="coverLetterModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-6 max-w-2xl w-full mx-4 max-h-[80vh] flex flex-col">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-bold"><i class="fas fa-envelope text-purple-600 mr-2"></i>Cover Letter</h3>
+        <button onclick="copyCoverLetter()" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded text-sm">
+          <i class="fas fa-copy mr-1"></i>Copy
+        </button>
+      </div>
+      <div id="coverLetterContent" class="flex-1 overflow-y-auto whitespace-pre-wrap text-sm text-gray-700 bg-gray-50 rounded-lg p-4 font-mono"></div>
+      <div class="flex gap-3 mt-4">
+        <button onclick="hideCoverLetterModal()" class="flex-1 px-4 py-2 border rounded-lg hover:bg-gray-50">Close</button>
+        <a id="coverLetterDownloadLink" href="#" class="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 text-center font-medium">
+          <i class="fas fa-download mr-2"></i>Download .md
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
