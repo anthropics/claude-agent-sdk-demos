@@ -1,0 +1,5 @@
+mkdir -p ~/claude-agent-scripts && cd ~/claude-agent-scripts
+uv venv
+source .venv/bin/activate
+uv pip install claude-agent-sdk
+python listfiles.py

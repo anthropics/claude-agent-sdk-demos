@@ -1,8 +1,8 @@
-# Email Agent Demo
+# Email Agent
 
-> ⚠️ **IMPORTANT**: This is a demo application by Anthropic. It is intended for local development only and should NOT be deployed to production or used at scale.
+> ⚠️ **IMPORTANT**: This application is for local development. Do not deploy to production or use at scale without review.
 
-A demonstration email client powered by Claude and the Claude Code SDK, showcasing AI-powered email management capabilities.
+An email client powered by Claude and the Claude Code SDK, showcasing AI-powered email management capabilities.
 
 ## Architecture
 
@@ -78,15 +78,15 @@ IMAP_PORT=993
 
 ## Support
 
-This is a demo application provided as-is. For issues related to:
+This application is provided as-is. For issues related to:
 - **Claude Code SDK**: [SDK Documentation](https://docs.anthropic.com/claude-code)
-- **Demo Issues**: [GitHub Issues](https://github.com/anthropics/sdk-demos/issues)
+- **Application issues**: [GitHub Issues](https://github.com/anthropics/sdk-demos/issues)
 - **API Questions**: [Anthropic Support](https://support.anthropic.com)
 
 ## License
 
-MIT License - This is sample code for demonstration purposes.
+MIT License - This is sample code for development and reference purposes.
 
 ---
 
-Built by Anthropic to demonstrate the [Claude Code SDK](https://github.com/anthropics/claude-code-sdk)
+Built by Anthropic for the [Claude Code SDK](https://github.com/anthropics/claude-code-sdk)

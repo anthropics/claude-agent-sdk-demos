@@ -1,12 +1,12 @@
-# Excel Demo
+# Excel
 
-> ⚠️ **IMPORTANT**: This is a demo application by Anthropic. It is intended for local development only and should NOT be deployed to production or used at scale.
+> ⚠️ **IMPORTANT**: This application is for local development. Do not deploy to production or use at scale without review.
 
-A demonstration desktop application powered by Claude and the [Claude Agent SDK](https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-overview), showcasing AI-powered spreadsheet creation, analysis, and manipulation capabilities.
+A desktop application powered by Claude and the [Claude Agent SDK](https://docs.anthropic.com/en/docs/claude-code/sdk/sdk-overview), showcasing AI-powered spreadsheet creation, analysis, and manipulation capabilities.
 
-## What This Demo Shows
+## What This Application Does
 
-This Electron-based desktop application demonstrates how to:
+This Electron-based desktop application shows how to:
 - Create sophisticated Excel spreadsheets with formulas, formatting, and multiple sheets
 - Analyze and manipulate existing spreadsheet data
 - Use Claude to assist with data organization and spreadsheet design
@@ -53,7 +53,7 @@ npm start
 
 ## Working with Python Examples
 
-The `agent/` directory contains Python scripts demonstrating spreadsheet generation:
+The `agent/` directory contains Python scripts for spreadsheet generation:
 
 ### Setup Python Environment
 
@@ -107,15 +107,15 @@ excel-demo/
 
 ## Support
 
-This is a demo application provided as-is. For issues related to:
+This application is provided as-is. For issues related to:
 - **Claude Agent SDK**: [SDK Documentation](https://docs.anthropic.com/claude-code)
-- **Demo Issues**: [GitHub Issues](https://github.com/anthropics/sdk-demos/issues)
+- **Application issues**: [GitHub Issues](https://github.com/anthropics/sdk-demos/issues)
 - **API Questions**: [Anthropic Support](https://support.anthropic.com)
 
 ## License
 
-MIT - This is sample code for demonstration purposes.
+MIT - This is sample code for development and reference purposes.
 
 ---
 
-Built by Anthropic to demonstrate the [Claude Agent SDK](https://github.com/anthropics/claude-code-sdk)
+Built by Anthropic for the [Claude Agent SDK](https://github.com/anthropics/claude-code-sdk)

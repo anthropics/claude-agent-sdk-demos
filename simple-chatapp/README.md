@@ -1,6 +1,6 @@
 # Simple Chat App
 
-A demo chat application using the Claude Agent SDK with a React frontend and Express backend.
+A chat application using the Claude Agent SDK with a React frontend and Express backend.
 
 ![Architecture Diagram](diagram.png)
 
@@ -31,7 +31,7 @@ Open http://localhost:5173 in your browser.
 
 ## Production Considerations
 
-This is an example app for demonstration purposes. For production use, consider:
+This is an example app for reference. For production use, consider:
 
 1. **Isolate the Agent SDK** - Move the SDK into a separate container/service. This provides better security isolation since the agent has access to tools like Bash, file system operations, and web requests.
 
@@ -41,6 +41,6 @@ This is an example app for demonstration purposes. For production use, consider:
 
 4. **Authentication** - Add user authentication and authorization. Currently anyone can access any chat.
 
-## Demo
+## Preview
 
-![Demo](demo.gif)
+![Preview](demo.gif)

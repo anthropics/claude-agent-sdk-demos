@@ -1,6 +1,6 @@
 # Simple Chat App
 
-A minimal chat application demonstrating the Claude Agent SDK.
+A minimal chat application using the Claude Agent SDK.
 
 ## Architecture
 
