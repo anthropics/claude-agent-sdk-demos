@@ -1,0 +1,17 @@
+[project]
+name = "safety-guardrails-demo"
+version = "0.1.0"
+description = "Safety scanning for Claude Agent SDK applications using Sentinel AI"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-agent-sdk>=0.1.0",
+    "python-dotenv>=1.0.0",
+    "sentinel-guardrails>=0.5.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["safety_guardrails*"]
