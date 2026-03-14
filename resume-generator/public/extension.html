@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Chrome Extension - Resume Tailor</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-purple-50 min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="mb-4">
+        <a href="dashboard.html" class="text-indigo-600 hover:text-indigo-800">
+          <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+        </a>
+      </div>
+      <div class="text-6xl mb-4">🔌</div>
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">Chrome Extension</h1>
+      <p class="text-xl text-gray-600">Tailor resumes right from any job posting page</p>
+    </div>
+
+    <!-- Download Card -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+      <div class="flex items-start gap-6 mb-6">
+        <div class="flex-shrink-0">
+          <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-white text-3xl">
+            <i class="fas fa-puzzle-piece"></i>
+          </div>
+        </div>
+        <div class="flex-1">
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Resume Tailor Extension</h2>
+          <p class="text-gray-600 mb-4">
+            Extract job descriptions and tailor your resume without leaving the page.
+            Works on LinkedIn, Indeed, Glassdoor, and all job sites.
+          </p>
+          <div class="flex gap-3 flex-wrap">
+            <a
+              href="/resume-tailor-extension.tar.gz"
+              download
+              class="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition font-semibold inline-block"
+            >
+              <i class="fas fa-download mr-2"></i>Download Extension
+            </a>
+            <button
+              onclick="showInstructions()"
+              class="px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-lg hover:bg-indigo-50 transition font-semibold"
+            >
+              <i class="fas fa-book mr-2"></i>View Instructions
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="grid md:grid-cols-3 gap-4 pt-6 border-t">
+        <div class="text-center p-4">
+          <i class="fas fa-magic text-3xl text-indigo-600 mb-2"></i>
+          <h3 class="font-semibold mb-1">One-Click Extract</h3>
+          <p class="text-sm text-gray-600">Auto-extract job descriptions from any page</p>
+        </div>
+        <div class="text-center p-4">
+          <i class="fas fa-rocket text-3xl text-purple-600 mb-2"></i>
+          <h3 class="font-semibold mb-1">Instant Tailoring</h3>
+          <p class="text-sm text-gray-600">AI tailors your resume in minutes</p>
+        </div>
+        <div class="text-center p-4">
+          <i class="fas fa-shield-alt text-3xl text-green-600 mb-2"></i>
+          <h3 class="font-semibold mb-1">100% Private</h3>
+          <p class="text-sm text-gray-600">Runs on your local server</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Installation Instructions -->
+    <div id="instructions" class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        <i class="fas fa-cog text-indigo-600 mr-2"></i>Installation Instructions
+      </h2>
+
+      <!-- Step 1 -->
+      <div class="mb-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">
+            1
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2">Download the Extension</h3>
+            <p class="text-gray-600 mb-3">Click the download button above to get the extension package.</p>
+            <a
+              href="/resume-tailor-extension.tar.gz"
+              download
+              class="inline-block px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 text-sm"
+            >
+              <i class="fas fa-download mr-2"></i>Download resume-tailor-extension.tar.gz
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="mb-6 border-t pt-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">
+            2
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2">Extract the Archive</h3>
+            <p class="text-gray-600 mb-3">
+              Extract to a permanent location (don't delete after installing!)
+            </p>
+            <div class="bg-gray-50 p-4 rounded-lg space-y-2 text-sm">
+              <div>
+                <strong class="text-indigo-600">Windows:</strong>
+                <code class="ml-2 bg-gray-200 px-2 py-1 rounded">Right-click → Extract All</code>
+              </div>
+              <div>
+                <strong class="text-indigo-600">Mac:</strong>
+                <code class="ml-2 bg-gray-200 px-2 py-1 rounded">Double-click or use Archive Utility</code>
+              </div>
+              <div>
+                <strong class="text-indigo-600">Linux:</strong>
+                <code class="ml-2 bg-gray-200 px-2 py-1 rounded">tar -xzf resume-tailor-extension.tar.gz</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="mb-6 border-t pt-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">
+            3
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2">Open Chrome Extensions</h3>
+            <p class="text-gray-600 mb-3">Type in your Chrome address bar:</p>
+            <div class="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-center text-lg mb-3">
+              chrome://extensions/
+            </div>
+            <p class="text-sm text-gray-500">
+              Or: Chrome Menu (⋮) → Extensions → Manage Extensions
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="mb-6 border-t pt-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">
+            4
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2">Enable Developer Mode</h3>
+            <p class="text-gray-600 mb-3">Toggle the "Developer mode" switch in the top-right corner.</p>
+            <div class="bg-blue-50 border border-blue-200 p-3 rounded-lg text-sm">
+              <strong>📍 Look for:</strong> A toggle switch labeled "Developer mode" at the top-right of the page
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="mb-6 border-t pt-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold">
+            5
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2">Load Unpacked Extension</h3>
+            <p class="text-gray-600 mb-3">
+              Click "Load unpacked" button and select the extracted folder.
+            </p>
+            <div class="bg-yellow-50 border border-yellow-300 p-4 rounded-lg mb-3">
+              <div class="flex items-start gap-2">
+                <i class="fas fa-exclamation-triangle text-yellow-600 mt-1"></i>
+                <div>
+                  <strong class="text-yellow-800">Important:</strong>
+                  <p class="text-sm text-yellow-700 mt-1">
+                    Select the extracted <strong>folder</strong>, not the .tar.gz file!<br>
+                    The folder should contain manifest.json, popup.html, etc.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 6 -->
+      <div class="mb-6 border-t pt-6">
+        <div class="flex items-start gap-4">
+          <div class="flex-shrink-0 w-10 h-10 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-xl">
+            ✓
+          </div>
+          <div class="flex-1">
+            <h3 class="font-bold text-lg mb-2 text-green-800">Extension Installed! 🎉</h3>
+            <p class="text-gray-600 mb-3">
+              You should see "Resume Tailor - AI-Powered Resume Optimization" in your extensions list.
+            </p>
+            <div class="bg-green-50 border border-green-200 p-4 rounded-lg">
+              <p class="font-semibold text-green-800 mb-2">💡 Pro Tip: Pin the extension</p>
+              <p class="text-sm text-green-700">
+                Click the puzzle icon (🧩) in Chrome toolbar → Find "Resume Tailor" → Click pin icon 📌<br>
+                This makes the extension always visible in your toolbar!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- How to Use -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        <i class="fas fa-play-circle text-indigo-600 mr-2"></i>How to Use
+      </h2>
+
+      <div class="space-y-4">
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">
+            1
+          </div>
+          <div>
+            <strong>Navigate to any job posting</strong>
+            <p class="text-sm text-gray-600">LinkedIn, Indeed, Glassdoor, company career pages, etc.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">
+            2
+          </div>
+          <div>
+            <strong>Click the extension icon</strong>
+            <p class="text-sm text-gray-600">Look for 📄 icon in your Chrome toolbar (pin it for easy access!)</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">
+            3
+          </div>
+          <div>
+            <strong>Upload your resume (.docx)</strong>
+            <p class="text-sm text-gray-600">One-time upload, extension remembers it for future use</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">
+            4
+          </div>
+          <div>
+            <strong>Click "Extract from Current Page"</strong>
+            <p class="text-sm text-gray-600">Automatically grabs the job description from the page</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 text-indigo-600 rounded-full flex items-center justify-center text-sm font-bold">
+            5
+          </div>
+          <div>
+            <strong>Click "Tailor My Resume"</strong>
+            <p class="text-sm text-gray-600">AI researches company + technologies and generates tailored resume</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3">
+          <div class="flex-shrink-0 w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+            ✓
+          </div>
+          <div>
+            <strong>Download your tailored resume!</strong>
+            <p class="text-sm text-gray-600">Ready to apply in under 5 minutes ⚡</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Troubleshooting -->
+    <div class="bg-orange-50 border border-orange-200 rounded-2xl p-6 mb-6">
+      <h3 class="font-bold text-lg mb-4 text-orange-900">
+        <i class="fas fa-wrench mr-2"></i>Troubleshooting
+      </h3>
+      <div class="space-y-3 text-sm">
+        <div>
+          <strong class="text-orange-800">Extension icon doesn't appear:</strong>
+          <p class="text-orange-700">Refresh chrome://extensions/ and click the reload icon on the extension</p>
+        </div>
+        <div>
+          <strong class="text-orange-800">Can't extract job description:</strong>
+          <p class="text-orange-700">Refresh the job page first, or try a different job site. Use manual paste as backup.</p>
+        </div>
+        <div>
+          <strong class="text-orange-800">Server connection error:</strong>
+          <p class="text-orange-700">Make sure the server is running. Visit <a href="/api/health" class="underline">health check</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 text-gray-600">
+      <p class="mb-4">
+        <a href="dashboard.html" class="text-indigo-600 hover:text-indigo-800 font-medium">
+          <i class="fas fa-arrow-left mr-1"></i>Back to Dashboard
+        </a>
+        <span class="mx-3">•</span>
+        <a href="index.html" class="text-indigo-600 hover:text-indigo-800 font-medium">
+          Manual Tailor Tool
+        </a>
+      </p>
+      <p class="text-sm">
+        <i class="fas fa-shield-alt mr-1"></i>
+        Your resume stays private - processed locally on your server
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function showInstructions() {
+      const instructions = document.getElementById('instructions');
+      instructions.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+[
+  {
+    "id": "job1",
+    "title": "Full Stack Software Engineer, Reinforcement Learning",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5098984008"
+  },
+  {
+    "id": "job2",
+    "title": "Machine Learning Systems Engineer, Research Tools",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4952079008"
+  },
+  {
+    "id": "job3",
+    "title": "Research Engineer, Machine Learning (Reinforcement Learning)",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4613568008"
+  },
+  {
+    "id": "job4",
+    "title": "Performance Engineer, GPU",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/4926227008"
+  },
+  {
+    "id": "job5",
+    "title": "Research Engineer / Research Scientist, Vision",
+    "company": "Anthropic",
+    "url": "https://job-boards.greenhouse.io/anthropic/jobs/5074217008"
+  }
+]

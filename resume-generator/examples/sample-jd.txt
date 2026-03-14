@@ -1,0 +1,41 @@
+Senior Software Engineer - AI/ML Platform
+TechCorp Inc.
+
+About the Role:
+We're seeking a Senior Software Engineer to join our AI/ML Platform team. You'll build scalable infrastructure that powers machine learning workflows for thousands of data scientists.
+
+Responsibilities:
+• Design and implement distributed systems for ML training and inference
+• Build APIs and SDKs used by data science teams
+• Optimize system performance and reliability at scale
+• Collaborate with ML researchers to productionize models
+• Mentor junior engineers and lead technical initiatives
+
+Required Qualifications:
+• 5+ years of software engineering experience
+• Strong proficiency in Python and/or TypeScript
+• Experience with distributed systems and cloud platforms (AWS, GCP, Azure)
+• Deep understanding of system design and scalability
+• Track record of building production ML infrastructure
+
+Preferred Qualifications:
+• Experience with ML frameworks (PyTorch, TensorFlow, JAX)
+• Knowledge of containerization (Docker, Kubernetes)
+• Familiarity with ML ops tools and practices
+• Open source contributions
+• Experience at high-growth startups
+
+Technical Skills:
+• Languages: Python, TypeScript, Go, Rust
+• ML: PyTorch, TensorFlow, scikit-learn
+• Infrastructure: Kubernetes, Docker, Terraform
+• Databases: PostgreSQL, Redis, MongoDB
+• Cloud: AWS (EC2, S3, Lambda), GCP, Azure
+
+What We Offer:
+• Competitive salary ($180k-$250k) + equity
+• Remote-first culture
+• Work with cutting-edge ML technology
+• Collaborative, innovation-driven team
+
+TechCorp is committed to diversity and inclusion. We encourage applications from all backgrounds.
