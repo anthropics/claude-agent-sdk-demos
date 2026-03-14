@@ -5,13 +5,16 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from claude_agent_sdk import ClaudeSDKClient, ClaudeAgentOptions, AgentDefinition, HookMatcher
-
 from research_agent.utils.subagent_tracker import SubagentTracker
 from research_agent.utils.transcript import setup_session, TranscriptWriter
 from research_agent.utils.message_handler import process_assistant_message
 
 # Load environment variables
 load_dotenv()
+
+if os.environ.get("LMNR_PROJECT_API_KEY"):
+    from lmnr import Laminar
+    Laminar.initialize()
 
 # Paths to prompt files
 PROMPTS_DIR = Path(__file__).parent / "prompts"

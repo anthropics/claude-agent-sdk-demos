@@ -108,3 +108,11 @@ The `parent_tool_use_id` links tool calls to their subagent:
 {"event":"tool_call_start","agent_id":"RESEARCHER-1","tool_name":"WebSearch",...}
 {"event":"tool_call_complete","success":true,"output_size":15234}
 ```
+
+## Tracing with Laminar
+
+You can trace the agent and capture LLM calls, tool calls, and subagent spawning with [Laminar](https://laminar.sh/) by simply providing the `LMNR_PROJECT_API_KEY` environment variable:
+
+```bash
+export LMNR_PROJECT_API_KEY="your-laminar-api-key"
+```
