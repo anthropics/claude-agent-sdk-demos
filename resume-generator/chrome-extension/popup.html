@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Resume Tailor</title>
+  <style>
+    body {
+      width: 450px;
+      min-height: 500px;
+      margin: 0;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin: 0 0 16px 0;
+      font-size: 20px;
+      color: #1a202c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section {
+      margin-bottom: 16px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 6px;
+    }
+    input[type="file"] {
+      width: 100%;
+      padding: 8px;
+      border: 2px dashed #cbd5e0;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    input[type="file"]:hover {
+      border-color: #667eea;
+    }
+    .checkbox-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: #4a5568;
+      cursor: pointer;
+    }
+    input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover:not(:disabled) {
+      transform: translateY(-2px);
+    }
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .status {
+      margin-top: 12px;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      display: none;
+    }
+    .status.info {
+      background: #e6f7ff;
+      color: #0066cc;
+      display: block;
+    }
+    .status.success {
+      background: #d4edda;
+      color: #155724;
+      display: block;
+    }
+    .status.error {
+      background: #f8d7da;
+      color: #721c24;
+      display: block;
+    }
+    .progress {
+      margin-top: 12px;
+      max-height: 150px;
+      overflow-y: auto;
+      font-size: 11px;
+      color: #4a5568;
+      background: #f7fafc;
+      padding: 8px;
+      border-radius: 6px;
+      display: none;
+    }
+    .progress.show {
+      display: block;
+    }
+    .extract-btn {
+      width: 100%;
+      padding: 8px;
+      background: #48bb78;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+    .extract-btn:hover {
+      background: #38a169;
+    }
+    .download-link {
+      display: none;
+      margin-top: 12px;
+      padding: 10px;
+      background: #48bb78;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .download-link.show {
+      display: block;
+    }
+    .small-text {
+      font-size: 11px;
+      color: #718096;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span>📄</span>
+      Resume Tailor
+    </h1>
+
+    <div class="section">
+      <label>Resume (.docx)</label>
+      <input type="file" id="resumeFile" accept=".docx">
+      <div class="small-text">Upload your current resume</div>
+    </div>
+
+    <div class="section">
+      <label>Job Description</label>
+      <button class="extract-btn" id="extractBtn">
+        ✨ Extract from Current Page
+      </button>
+      <div class="small-text" id="extractedInfo" style="display:none; color: #48bb78; font-weight: 600;">
+        ✓ Job description extracted from page
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="enableWebSearch" checked>
+          <span>🔍 Web Research</span>
+        </label>
+      </div>
+      <div class="small-text">Enable AI research for company info & technologies (slower but richer)</div>
+    </div>
+
+    <button id="tailorBtn" disabled>
+      Tailor My Resume
+    </button>
+
+    <div id="status" class="status"></div>
+    <div id="progress" class="progress"></div>
+    <a id="downloadLink" class="download-link" download="tailored_resume.docx">
+      ⬇️ Download Tailored Resume
+    </a>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

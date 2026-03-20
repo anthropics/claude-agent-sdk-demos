@@ -85,6 +85,7 @@ export class EmailDatabase {
       CREATE TABLE IF NOT EXISTS emails (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         message_id TEXT UNIQUE NOT NULL,
+        imap_uid INTEGER,
         thread_id TEXT,
         in_reply_to TEXT,
         email_references TEXT,

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Tailor - AI-Powered Resume Optimization</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <div id="app" class="container mx-auto px-4 py-8 max-w-5xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <div class="flex justify-end mb-4">
+        <a href="dashboard.html" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium inline-flex items-center gap-2">
+          <i class="fas fa-th-large"></i>
+          Job Dashboard
+        </a>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">
+        <i class="fas fa-file-alt text-indigo-600"></i> Resume Tailor
+      </h1>
+      <p class="text-gray-600">AI-powered resume optimization for specific job descriptions</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-6">
+      <!-- Upload Section -->
+      <div class="mb-8">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          <i class="fas fa-upload text-indigo-600"></i> Upload Your Resume (.docx)
+        </label>
+        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-400 transition">
+          <input
+            type="file"
+            id="resumeFile"
+            accept=".docx"
+            class="hidden"
+            onchange="handleFileSelect(event)"
+          >
+          <label
+            for="resumeFile"
+            class="cursor-pointer"
+          >
+            <div id="fileInfo" class="text-gray-500">
+              <i class="fas fa-cloud-upload-alt text-4xl mb-2 text-indigo-400"></i>
+              <p class="font-medium">Click to upload or drag and drop</p>
+              <p class="text-sm">Only .docx files supported</p>
+            </div>
+          </label>
+        </div>
+        <div class="mt-3 text-center">
+          <button
+            onclick="useSampleResume()"
+            class="text-indigo-600 hover:text-indigo-800 font-medium text-sm"
+          >
+            <i class="fas fa-file-alt mr-1"></i> Use Sample Resume (for testing)
+          </button>
+        </div>
+      </div>
+
+      <!-- Job Description Section -->
+      <div class="mb-8">
+        <label class="block text-sm font-semibold text-gray-700 mb-3">
+          <i class="fas fa-briefcase text-indigo-600"></i> Job Description
+        </label>
+
+        <!-- Tab Switcher -->
+        <div class="flex mb-4 border-b border-gray-200 justify-between">
+          <div class="flex">
+            <button
+              id="urlTab"
+              class="px-4 py-2 font-medium text-indigo-600 border-b-2 border-indigo-600"
+              onclick="switchTab('url')"
+            >
+              <i class="fas fa-link mr-1"></i> URL
+            </button>
+            <button
+              id="textTab"
+              class="px-4 py-2 font-medium text-gray-500 hover:text-gray-700"
+              onclick="switchTab('text')"
+            >
+              <i class="fas fa-align-left mr-1"></i> Paste Text
+            </button>
+          </div>
+          <div class="flex items-center gap-2 px-4">
+            <label class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer" title="Enable web research for company info and technologies (takes longer but provides richer context)">
+              <input
+                type="checkbox"
+                id="enableWebSearch"
+                checked
+                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500"
+              >
+              <i class="fas fa-search text-gray-500"></i>
+              <span>Web Research</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- URL Input -->
+        <div id="urlInput">
+          <div class="mb-3">
+            <label class="block text-xs font-medium text-gray-600 mb-2">
+              <i class="fas fa-star text-yellow-500"></i> Try a sample Anthropic job posting:
+            </label>
+            <select
+              id="sampleJobSelect"
+              class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 text-sm"
+              onchange="handleSampleJobSelect(event)"
+            >
+              <option value="">-- Select a sample job --</option>
+            </select>
+          </div>
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-300"></div>
+            </div>
+            <div class="relative flex justify-center text-xs">
+              <span class="px-2 bg-white text-gray-500">or paste your own URL</span>
+            </div>
+          </div>
+          <input
+            id="jobDescriptionUrl"
+            type="url"
+            class="mt-3 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-mono text-sm"
+            placeholder="Paste the job posting URL here (e.g., https://jobs.company.com/position/12345)"
+          >
+          <p class="text-xs text-gray-500 mt-2">
+            <i class="fas fa-info-circle"></i> Supports URLs from LinkedIn, Indeed, company career pages, and more
+          </p>
+        </div>
+
+        <!-- Text Input -->
+        <div id="textInput" class="hidden">
+          <textarea
+            id="jobDescription"
+            rows="12"
+            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent resize-none font-mono text-sm"
+            placeholder="Paste the complete job description here...
+
+Example:
+Senior Software Engineer - AI/ML Platform
+TechCorp Inc.
+
+Responsibilities:
+• Design and implement distributed systems...
+• Build APIs and SDKs...
+
+Required Qualifications:
+• 5+ years of experience...
+• Python, TypeScript..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        id="submitBtn"
+        onclick="tailorResume()"
+        class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-4 rounded-lg transition duration-200 disabled:bg-gray-400 disabled:cursor-not-allowed shadow-lg"
+      >
+        <i class="fas fa-magic mr-2"></i>
+        <span id="btnText">Tailor My Resume</span>
+      </button>
+    </div>
+
+    <!-- Progress Section -->
+    <div id="progressSection" class="hidden bg-white rounded-2xl shadow-xl p-8 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">
+        <i class="fas fa-cog fa-spin text-indigo-600"></i> Processing...
+      </h2>
+      <div id="progressLog" class="space-y-2 max-h-96 overflow-y-auto font-mono text-sm">
+        <!-- Progress messages will appear here -->
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="resultsSection" class="hidden bg-white rounded-2xl shadow-xl p-8">
+      <h2 class="text-2xl font-bold text-gray-800 mb-6">
+        <i class="fas fa-check-circle text-green-500"></i> Results
+      </h2>
+
+      <!-- Download Buttons -->
+      <div class="grid md:grid-cols-2 gap-4 mb-6">
+        <a
+          id="downloadResume"
+          class="hidden bg-green-500 hover:bg-green-600 text-white font-semibold py-4 px-6 rounded-lg text-center transition duration-200 shadow-lg"
+        >
+          <i class="fas fa-download mr-2"></i> Download Tailored Resume
+        </a>
+        <button
+          id="viewAnalysis"
+          class="hidden bg-blue-500 hover:bg-blue-600 text-white font-semibold py-4 px-6 rounded-lg transition duration-200 shadow-lg"
+          onclick="toggleAnalysis()"
+        >
+          <i class="fas fa-chart-line mr-2"></i> View Analysis
+        </button>
+      </div>
+
+      <!-- Analysis Content -->
+      <div id="analysisContent" class="hidden">
+        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+          <h3 class="font-bold text-lg mb-3 text-gray-800">Tailoring Analysis</h3>
+          <div id="analysisText" class="prose prose-sm max-w-none">
+            <!-- Analysis markdown will be rendered here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Start Over Button -->
+      <div class="mt-6 text-center">
+        <button
+          onclick="resetForm()"
+          class="text-indigo-600 hover:text-indigo-800 font-medium"
+        >
+          <i class="fas fa-redo mr-1"></i> Tailor Another Resume
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8 text-gray-600 text-sm">
+      <p>
+        <i class="fas fa-robot"></i> Powered by Claude Agent SDK
+        <span class="mx-2">•</span>
+        <i class="fas fa-shield-alt"></i> Your files are processed locally and not stored
+      </p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -3,14 +3,23 @@
   "type": "module",
   "description": "Generate professional resumes using Claude Agent SDK with web search",
   "scripts": {
-    "start": "npx tsx resume-generator.ts"
+    "start": "npx tsx resume-generator.ts",
+    "web": "npx tsx server.ts",
+    "tailor": "npx tsx resume-tailor.ts"
   },
   "dependencies": {
     "@anthropic-ai/claude-agent-sdk": "^0.1.59",
-    "docx": "^9.5.1"
+    "docx": "^9.5.1",
+    "express": "^4.18.2",
+    "mammoth": "^1.11.0",
+    "multer": "^1.4.5-lts.1",
+    "ws": "^8.14.2"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.11",
     "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.10",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   }
