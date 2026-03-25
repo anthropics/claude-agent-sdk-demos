@@ -6,12 +6,17 @@ import { chatStore } from "./chat-store.js";
 export class Session {
   public readonly chatId: string;
   private subscribers: Set<WSClient> = new Set();
-  private agentSession: AgentSession;
+  private agentSession!: AgentSession;
   private isListening = false;
 
-  constructor(chatId: string) {
+  private constructor(chatId: string) {
     this.chatId = chatId;
-    this.agentSession = new AgentSession();
+  }
+
+  static async create(chatId: string): Promise<Session> {
+    const instance = new Session(chatId);
+    instance.agentSession = await AgentSession.create();
+    return instance;
   }
 
   // Start listening to agent output (call once)
@@ -30,7 +35,7 @@ export class Session {
   }
 
   // Send a user message to the agent
-  sendMessage(content: string) {
+  async sendMessage(content: string) {
     // Store user message
     chatStore.addMessage(this.chatId, {
       role: "user",
@@ -44,13 +49,9 @@ export class Session {
       chatId: this.chatId,
     });
 
-    // Send to agent first (this starts the session if needed)
-    this.agentSession.sendMessage(content);
-
-    // Start listening if not already
-    if (!this.isListening) {
-      this.startListening();
-    }
+    // Send to agent and start listening for response
+    await this.agentSession.sendMessage(content);
+    this.startListening();
   }
 
   private handleSDKMessage(message: any) {

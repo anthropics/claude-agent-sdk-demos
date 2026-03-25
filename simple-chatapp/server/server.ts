@@ -30,10 +30,10 @@ app.get("/", (req, res) => {
 // Session management
 const sessions: Map<string, Session> = new Map();
 
-function getOrCreateSession(chatId: string): Session {
+async function getOrCreateSession(chatId: string): Promise<Session> {
   let session = sessions.get(chatId);
   if (!session) {
-    session = new Session(chatId);
+    session = await Session.create(chatId);
     sessions.set(chatId, session);
   }
   return session;
@@ -102,24 +102,32 @@ wss.on("connection", (ws: WSClient) => {
 
       switch (message.type) {
         case "subscribe": {
-          const session = getOrCreateSession(message.chatId);
-          session.subscribe(ws);
-          console.log(`Client subscribed to chat ${message.chatId}`);
+          getOrCreateSession(message.chatId).then((session) => {
+            session.subscribe(ws);
+            console.log(`Client subscribed to chat ${message.chatId}`);
 
-          // Send existing messages
-          const messages = chatStore.getMessages(message.chatId);
-          ws.send(JSON.stringify({
-            type: "history",
-            messages,
-            chatId: message.chatId,
-          }));
+            // Send existing messages
+            const messages = chatStore.getMessages(message.chatId);
+            ws.send(JSON.stringify({
+              type: "history",
+              messages,
+              chatId: message.chatId,
+            }));
+          }).catch((error) => {
+            console.error("Error subscribing to chat:", error);
+            ws.send(JSON.stringify({ type: "error", error: "Failed to subscribe" }));
+          });
           break;
         }
 
         case "chat": {
-          const session = getOrCreateSession(message.chatId);
-          session.subscribe(ws);
-          session.sendMessage(message.content);
+          getOrCreateSession(message.chatId).then(async (session) => {
+            session.subscribe(ws);
+            await session.sendMessage(message.content);
+          }).catch((error) => {
+            console.error("Error sending message:", error);
+            ws.send(JSON.stringify({ type: "error", error: "Failed to send message" }));
+          });
           break;
         }
 
