@@ -19,12 +19,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from client directory
-app.use("/client", express.static(path.join(__dirname, "../client")));
-
-// Serve index.html at root
+// Root: tell stray visitors where the UI actually lives
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../client/index.html"));
+  res
+    .type("text/plain")
+    .send("This is the API server. Open the chat UI at http://localhost:5173");
 });
 
 // Session management
@@ -159,7 +158,7 @@ wss.on("close", () => {
 
 // Start server
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`API server running at http://localhost:${PORT}`);
   console.log(`WebSocket endpoint available at ws://localhost:${PORT}/ws`);
-  console.log(`Visit http://localhost:${PORT} to view the chat interface`);
+  console.log(`Open the chat UI at http://localhost:5173 (Vite dev server)`);
 });
