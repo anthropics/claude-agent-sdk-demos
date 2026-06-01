@@ -72,14 +72,14 @@ Then analyze the images to determine the purpose of each form field (make sure t
 ]
 ```
 - Run the `fill_fillable_fields.py` script from this file's directory to create a filled-in PDF:
-`python scripts/fill_fillable_fields.py <input pdf> <field_values.json> <output pdf>`
+`python scripts/fill_fillable_fields.py <input.pdf> <field_values.json> <output.pdf>`
 This script will verify that the field IDs and values you provide are valid; if it prints error messages, correct the appropriate fields and try again.
 
 # Non-fillable fields
 If the PDF doesn't have fillable form fields, you'll need to visually determine where the data should be added and create text annotations. Follow the below steps *exactly*. You MUST perform all of these steps to ensure that the the form is accurately completed. Details for each step are below.
 - Convert the PDF to PNG images and determine field bounding boxes.
 - Create a JSON file with field information and validation images showing the bounding boxes.
-- Validate the the bounding boxes.
+- Validate the bounding boxes.
 - Use the bounding boxes to fill in the form.
 
 ## Step 1: Visual Analysis (REQUIRED)
