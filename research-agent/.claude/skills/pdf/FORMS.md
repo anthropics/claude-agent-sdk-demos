@@ -177,7 +177,7 @@ For checkboxes:
 ```
 
 Create validation images by running this script from this file's directory for each page:
-`python scripts/create_validation_image.py <page_number> <path_to_fields.json> <input_image_path> <output_image_path>
+`python scripts/create_validation_image.py <page_number> <path_to_fields.json> <input_image_path> <output_image_path>`
 
 The validation images will have red rectangles where text should be entered, and blue rectangles covering label text.
 
@@ -202,4 +202,4 @@ If there are errors, reanalyze the relevant fields, adjust the bounding boxes, a
 
 ### Step 4: Add annotations to the PDF
 Run this script from this file's directory to create a filled-out PDF using the information in fields.json:
-`python scripts/fill_pdf_form_with_annotations.py <input_pdf_path> <path_to_fields.json> <output_pdf_path>
+`python scripts/fill_pdf_form_with_annotations.py <input_pdf_path> <path_to_fields.json> <output_pdf_path>`
