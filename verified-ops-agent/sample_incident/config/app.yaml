@@ -1,0 +1,14 @@
+service: orders-api
+env: production
+
+db:
+  host: db.internal
+  port: 5432
+  # Lowered temporarily for schema migration on 2025-11-01.
+  # Restore to 50 once the migration is finished.
+  pool_size: 5
+  connect_timeout_ms: 3000
+
+http:
+  port: 8080
+  request_timeout_ms: 30000

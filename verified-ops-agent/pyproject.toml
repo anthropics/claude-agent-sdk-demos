@@ -1,0 +1,16 @@
+[project]
+name = "verified-ops-agent"
+version = "0.1.0"
+description = "Verification-heavy ops agent demo for the Claude Agent SDK (Python)"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-agent-sdk>=0.2.0",
+    "python-dotenv>=1.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["verified_ops_agent*"]

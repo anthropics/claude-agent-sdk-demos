@@ -1,0 +1,12 @@
+2025-11-02 13:58:11 INFO  api        request GET /health -> 200 (3ms)
+2025-11-02 14:02:04 INFO  deploy     release v2.41.0 rolled out to prod-1
+2025-11-02 14:02:31 INFO  api        request GET /orders -> 200 (44ms)
+2025-11-02 14:03:12 WARN  db.pool    connection wait exceeded 500ms (pool_size=5, waiters=7)
+2025-11-02 14:03:55 WARN  db.pool    connection wait exceeded 500ms (pool_size=5, waiters=15)
+2025-11-02 14:04:20 ERROR api        request GET /orders -> 504 (30001ms) upstream timeout
+2025-11-02 14:04:41 FATAL db.pool    could not acquire connection from pool (pool_size=5, waiters=42)
+2025-11-02 14:04:41 ERROR api        request POST /checkout -> 500 db unavailable
+2025-11-02 14:05:02 FATAL db.pool    could not acquire connection from pool (pool_size=5, waiters=58)
+2025-11-02 14:05:02 ERROR api        request POST /checkout -> 500 db unavailable
+2025-11-02 14:05:30 INFO  api        request GET /health -> 200 (2ms)
+2025-11-02 14:06:14 FATAL db.pool    could not acquire connection from pool (pool_size=5, waiters=61)

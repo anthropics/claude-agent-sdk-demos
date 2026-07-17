@@ -40,6 +40,12 @@ A React + Express chat UI backed by the SDK, showing a full conversation loop ov
 ### 📄 [Resume Generator](./resume-generator)
 Generates a one-page `.docx` resume by web-searching a person's name (LinkedIn, GitHub, news) and assembling the findings.
 
+### 🛡️ [Verified Ops Agent](./verified-ops-agent) (Python)
+A verification-heavy ops agent that diagnoses a simulated production incident and never applies an unverified fix:
+- Proposes a diagnosis + fix with read-only tools (`ClaudeSDKClient`)
+- Runs a fresh-context adversarial verifier that tries to *refute* the proposal (fail-closed verdict parsing)
+- Applies confirmed fixes behind a deterministic keyword tripwire (`can_use_tool`) with human confirmation for dangerous actions
+
 ## Quick Start
 
 Each demo has its own directory with dedicated setup instructions. Navigate to the specific demo folder and follow its README for setup and usage details.
