@@ -50,6 +50,19 @@ bun run dev
 
 6. Open your browser to `http://localhost:3000`
 
+### MiniMax Provider
+
+The structured action and listener calls can use MiniMax through its compatible API. Set these values in `.env`:
+
+```env
+LLM_PROVIDER=MiniMax
+MINIMAX_API_KEY=your-minimax-api-key
+MINIMAX_REGION=global_en
+MINIMAX_MODEL=MiniMax-M3
+```
+
+`MINIMAX_REGION` accepts `global_en` (`https://api.minimax.io/anthropic`) or `cn_zh` (`https://api.minimaxi.com/anthropic`). `MINIMAX_MODEL` accepts `MiniMax-M3` or `MiniMax-M2.7`.
+
 ## IMAP Setup Guide
 
 ### Gmail Setup
