@@ -70,7 +70,7 @@ export interface SubagentOptions<T = any> {
   };
 
   // Optional model to use (defaults to haiku for speed)
-  model?: "opus" | "sonnet" | "haiku";
+  model?: "opus" | "sonnet" | "haiku" | "MiniMax-M3" | "MiniMax-M2.7";
 }
 
 /**
