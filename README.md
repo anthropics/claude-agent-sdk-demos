@@ -40,6 +40,13 @@ A React + Express chat UI backed by the SDK, showing a full conversation loop ov
 ### 📄 [Resume Generator](./resume-generator)
 Generates a one-page `.docx` resume by web-searching a person's name (LinkedIn, GitHub, news) and assembling the findings.
 
+### 🔍 [MCP RAG Agent](./mcp-rag-agent)
+A multi-agent retrieval-augmented generation (RAG) system that answers questions from a private document corpus:
+- Lead agent orchestrates retrieval and evaluation sub-agents
+- Retrieval agent uses a FAISS-backed MCP tool server for semantic search
+- Evaluator agent scores retrieved chunks and synthesizes sourced answers
+- Includes a sample corpus about a fictional company (Nexora Technologies)
+
 ## Quick Start
 
 Each demo has its own directory with dedicated setup instructions. Navigate to the specific demo folder and follow its README for setup and usage details.
