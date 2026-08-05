@@ -1,0 +1,18 @@
+[project]
+name = "mcp-rag-agent"
+version = "0.1.0"
+description = "Multi-agent RAG system using Claude Agent SDK with MCP-based vector search"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-agent-sdk>=0.1.0",
+    "python-dotenv>=1.0.0",
+    "faiss-cpu>=1.7.0",
+    "sentence-transformers>=2.2.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["mcp_rag_agent*"]
