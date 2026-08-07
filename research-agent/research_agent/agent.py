@@ -110,7 +110,7 @@ async def chat():
         permission_mode="bypassPermissions",
         setting_sources=["project"],  # Load skills from project .claude directory
         system_prompt=lead_agent_prompt,
-        allowed_tools=["Task"],
+        allowed_tools=["Task", "Agent"],
         agents=agents,
         hooks=hooks,
         model="haiku"

@@ -216,9 +216,21 @@ class SubagentTracker:
                 "tool_input": tool_input,
                 "parent_tool_use_id": self._current_parent_id
             })
-        elif tool_name != 'Task':  # Skip Task calls for main agent (handled by spawn message)
-            # Main agent tool call
-            self._log_tool_use("MAIN AGENT", tool_name, tool_input)
+        else:
+            # Main agent tool call. Record it too so the post hook can report its
+            # result -- subagent spawns fail silently otherwise.
+            record = ToolCallRecord(
+                timestamp=timestamp,
+                tool_name=tool_name,
+                tool_input=tool_input,
+                tool_use_id=tool_use_id,
+                subagent_type="lead"
+            )
+            self.tool_call_records[tool_use_id] = record
+
+            # Spawns are already announced by the message stream handler.
+            if tool_name not in ('Task', 'Agent'):
+                self._log_tool_use("MAIN AGENT", tool_name, tool_input)
             self._log_to_jsonl({
                 "event": "tool_call_start",
                 "timestamp": timestamp,
