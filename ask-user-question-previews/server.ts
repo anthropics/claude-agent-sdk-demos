@@ -37,7 +37,17 @@ const pending = new Map<
 
 wss.on("connection", (ws) => {
   ws.on("message", (raw) => {
-    const msg = JSON.parse(raw.toString());
+    let msg;
+    try {
+      msg = JSON.parse(raw.toString());
+    } catch {
+      ws.close(1007, "Invalid JSON");
+      return;
+    }
+    if (msg === null || typeof msg !== "object" || Array.isArray(msg)) {
+      ws.close(1008, "Expected a message object");
+      return;
+    }
     if (msg.type === "prompt") {
       void runQuery(ws, msg.text);
     } else if (msg.type === "answer") {
