@@ -37,8 +37,14 @@ async function main() {
                 const ext = path.extname(filePath).toLowerCase();
                 if (ext === '.js' || ext === '.ts') {
                   const customScriptsPath = path.join(process.cwd(), 'agent', 'custom_scripts');
+                  const resolvedPath = path.resolve(process.cwd(), 'agent', filePath);
+                  const relativePath = path.relative(customScriptsPath, resolvedPath);
 
-                  if (!filePath.startsWith(customScriptsPath)) {
+                  if (
+                    relativePath === '..' ||
+                    relativePath.startsWith(`..${path.sep}`) ||
+                    path.isAbsolute(relativePath)
+                  ) {
                     return {
                       decision: 'block',
                       stopReason: `Script files (.js and .ts) must be written to the custom_scripts directory. Please use the path: ${customScriptsPath}/${path.basename(filePath)}`,
