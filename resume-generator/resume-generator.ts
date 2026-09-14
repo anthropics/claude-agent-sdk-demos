@@ -94,4 +94,7 @@ if (!personName) {
   process.exit(1);
 }
 
-generateResume(personName).catch(console.error);
+generateResume(personName).catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
