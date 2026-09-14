@@ -1,6 +1,7 @@
 """Transcript handling for conversation history."""
 
 import logging
+import tempfile
 from datetime import datetime
 from pathlib import Path
 
@@ -16,8 +17,9 @@ def setup_session() -> tuple[Path, Path]:
     """
     # Create session directory
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    session_dir = Path("logs") / f"session_{timestamp}"
-    session_dir.mkdir(parents=True, exist_ok=True)
+    logs_dir = Path("logs")
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    session_dir = Path(tempfile.mkdtemp(prefix=f"session_{timestamp}_", dir=logs_dir))
 
     # Transcript file in session directory
     transcript_file = session_dir / "transcript.txt"
