@@ -17,7 +17,7 @@ type UserMessage = {
 // Simple async queue - messages go in via push(), come out via async iteration
 class MessageQueue {
   private messages: UserMessage[] = [];
-  private waiting: ((msg: UserMessage) => void) | null = null;
+  private waiting: ((msg: UserMessage | null) => void) | null = null;
   private closed = false;
 
   push(content: string) {
@@ -45,15 +45,19 @@ class MessageQueue {
         yield this.messages.shift()!;
       } else {
         // Wait for next message
-        yield await new Promise<UserMessage>((resolve) => {
+        const message = await new Promise<UserMessage | null>((resolve) => {
           this.waiting = resolve;
         });
+        if (message === null) break;
+        yield message;
       }
     }
   }
 
   close() {
     this.closed = true;
+    this.waiting?.(null);
+    this.waiting = null;
   }
 }
 
