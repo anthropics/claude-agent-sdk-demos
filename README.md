@@ -18,6 +18,9 @@ Demonstrations of working with spreadsheets and Excel files using Claude.
 ### 👋 [Hello World](./hello-world)
 A simple getting-started example to help you understand the basics of the Claude Agent SDK.
 
+### 🐍 [Hello World (Python)](./hello-world-python)
+A minimal Python example showing `query()` and typed assistant text blocks.
+
 ### 🔄 [Hello World V2](./hello-world-v2)
 Examples for the V2 Session API (`unstable_v2_*`): separate `send()`/`stream()` instead of a single `query()` generator, with multi-turn conversation and session persistence patterns.
 
