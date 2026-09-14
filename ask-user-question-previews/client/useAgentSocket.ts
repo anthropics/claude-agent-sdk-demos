@@ -33,6 +33,9 @@ export function useAgentSocket(url: string) {
       sock.onopen = () => setConnected(true);
       sock.onclose = () => {
         setConnected(false);
+        setBusy(false);
+        setPending(null);
+        setStatus("");
         if (!shutdown) retry = setTimeout(connect, 1000);
       };
       sock.onmessage = (e) => {
