@@ -116,6 +116,10 @@ async function runQuery(ws: WebSocket, prompt: string) {
           // Ask each question in turn, blocking until the browser picks.
           send(ws, { type: "status", text: "waiting for your pick..." });
           for (const q of questions) {
+            // The close handler cannot reject a wait created after disconnect.
+            if (ws.readyState !== WebSocket.OPEN) {
+              throw new Error("client disconnected");
+            }
             const id = randomUUID();
             const label = await new Promise<string>((resolve, reject) => {
               pending.set(id, { ws, resolve, reject });
