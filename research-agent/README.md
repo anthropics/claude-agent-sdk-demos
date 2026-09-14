@@ -61,7 +61,7 @@ files/
 └── reports/            # Final PDF reports
 
 logs/
-└── session_YYYYMMDD_HHMMSS/
+└── session_YYYYMMDD_HHMMSS_<unique>/
     ├── transcript.txt      # Human-readable conversation
     └── tool_calls.jsonl    # Structured tool usage log
 ```
