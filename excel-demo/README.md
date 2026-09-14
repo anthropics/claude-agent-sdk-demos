@@ -22,7 +22,7 @@ The `agent/` folder contains Python examples including:
 
 ## Prerequisites
 
-- [Node.js 18+](https://nodejs.org) or [Bun](https://bun.sh)
+- [Node.js 18+](https://nodejs.org) (the Electron native dependency setup runs through Node.js)
 - An Anthropic API key ([get one here](https://console.anthropic.com))
 - Python 3.9+ (for the Python agent examples)
 - LibreOffice (optional, for formula recalculation)
@@ -38,7 +38,6 @@ cd sdk-demos/excel-demo
 2. Install dependencies:
 ```bash
 npm install
-# or bun install
 ```
 
 3. Configure your Anthropic API key:
@@ -48,8 +47,11 @@ npm install
 4. Run the Electron application:
 ```bash
 npm start
-# or bun start
 ```
+
+Use npm for both installation and startup. The `postinstall` script invokes
+Electron Builder, which runs a Node.js helper and is not compatible with Bun's
+replacement for the `node` executable during dependency installation.
 
 ## Working with Python Examples
 
