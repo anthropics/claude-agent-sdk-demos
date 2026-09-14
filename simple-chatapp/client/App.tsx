@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { ChatList } from "./components/ChatList";
 import { ChatWindow } from "./components/ChatWindow";
@@ -26,11 +26,15 @@ const WS_URL = `ws://${window.location.hostname}:3001/ws`;
 export default function App() {
   const [chats, setChats] = useState<Chat[]>([]);
   const [selectedChatId, setSelectedChatId] = useState<string | null>(null);
+  const selectedChatIdRef = useRef<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   // Handle WebSocket messages
   const handleWSMessage = useCallback((message: any) => {
+    // Read the current selection without replaying lastJsonMessage on chat changes.
+    if (message.chatId && message.chatId !== selectedChatIdRef.current) return;
+
     switch (message.type) {
       case "connected":
         console.log("Connected to server");
@@ -133,7 +137,8 @@ export default function App() {
     try {
       await fetch(`${API_BASE}/chats/${chatId}`, { method: "DELETE" });
       setChats((prev) => prev.filter((c) => c.id !== chatId));
-      if (selectedChatId === chatId) {
+      if (selectedChatIdRef.current === chatId) {
+        selectedChatIdRef.current = null;
         setSelectedChatId(null);
         setMessages([]);
       }
@@ -144,6 +149,7 @@ export default function App() {
 
   // Select a chat
   const selectChat = (chatId: string) => {
+    selectedChatIdRef.current = chatId;
     setSelectedChatId(chatId);
     setMessages([]);
     setIsLoading(false);
