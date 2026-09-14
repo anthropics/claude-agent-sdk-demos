@@ -1,0 +1,12 @@
+[project]
+name = "claude-agent-sdk-hello-world"
+version = "0.1.0"
+description = "Minimal Claude Agent SDK example for Python"
+requires-python = ">=3.10"
+dependencies = [
+    "claude-agent-sdk>=0.1.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
