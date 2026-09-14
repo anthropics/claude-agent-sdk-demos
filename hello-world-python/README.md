@@ -12,7 +12,7 @@ Requires Python 3.10+ and an Anthropic API key.
 ```bash
 cd hello-world-python
 python -m venv .venv
-source .venv/bin/activate       # Windows: .venv\\Scripts\\activate
+source .venv/bin/activate       # Windows: .venv\Scripts\activate
 python -m pip install -e .
 export ANTHROPIC_API_KEY="your-api-key"
 python hello_world.py
