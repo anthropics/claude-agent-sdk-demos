@@ -107,7 +107,8 @@ export class EmailSearcher {
   fetchEmail(uid: number): Promise<any> {
     return new Promise((resolve, reject) => {
       const fetch = this.imap.fetch(uid, { bodies: "" });
-      let emailData = "";
+      const emailChunks: Buffer[] = [];
+      let emailSize = 0;
       let resolved = false;
 
       // Keep track of listeners for cleanup
@@ -147,11 +148,12 @@ export class EmailSearcher {
           const dataHandler = (chunk: Buffer) => {
             // Add memory bounds checking (max 50MB per email)
             const chunkSize = chunk.length;
-            if (emailData.length + chunkSize > 50 * 1024 * 1024) {
+            if (emailSize + chunkSize > 50 * 1024 * 1024) {
               safeReject(new Error("Email too large (exceeds 50MB limit)"));
               return;
             }
-            emailData += chunk.toString("utf8");
+            emailChunks.push(chunk);
+            emailSize += chunkSize;
           };
 
           listeners.push({
@@ -163,10 +165,13 @@ export class EmailSearcher {
         };
 
         const endHandler = () => {
-          simpleParser(emailData, (err: Error | null, parsed: any) => {
-            if (err) safeReject(err);
-            else safeResolve(parsed);
-          });
+          simpleParser(
+            Buffer.concat(emailChunks, emailSize),
+            (err: Error | null, parsed: any) => {
+              if (err) safeReject(err);
+              else safeResolve(parsed);
+            },
+          );
         };
 
         listeners.push({ target: msg, event: "body", handler: bodyHandler });
@@ -181,7 +186,7 @@ export class EmailSearcher {
       };
 
       const fetchEndHandler = () => {
-        if (!emailData && !resolved) {
+        if (emailSize === 0 && !resolved) {
           safeReject(new Error("No email data received"));
         }
       };
