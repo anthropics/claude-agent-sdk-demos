@@ -1,7 +1,6 @@
 // ccsdk/listeners-manager.ts
 import { readdir, watch } from "fs/promises";
 import { join } from "path";
-import Anthropic from "@anthropic-ai/sdk";
 import type {
   ListenerConfig,
   ListenerModule,
@@ -15,6 +14,7 @@ import type { ImapManager } from "../database/imap-manager";
 import type { DatabaseManager } from "../database/database-manager";
 import type { UIStateManager } from "./ui-state-manager";
 import { LogWriter, type ListenerLogEntry } from "./log-writer";
+import { createLlmClient } from "./llm-provider";
 
 /**
  * Manages loading, watching, and executing listener scripts
@@ -311,19 +311,9 @@ export class ListenersManager {
           schema: options.schema
         });
 
-        const anthropic = new Anthropic({
-          apiKey: process.env.ANTHROPIC_API_KEY
-        });
+        const { client, model } = createLlmClient(options.model);
 
-        const modelMap: Record<string, string> = {
-          opus: "claude-opus-4-20250514",
-          sonnet: "claude-sonnet-4-20250514",
-          haiku: "claude-3-5-haiku-20241022"
-        };
-
-        const model = modelMap[options.model || "haiku"];
-
-        const response = await anthropic.messages.create({
+        const response = await client.messages.create({
           model,
           max_tokens: 4096,
           messages: [

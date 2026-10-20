@@ -69,8 +69,8 @@ export interface SubagentOptions<T = any> {
     required?: string[];
   };
 
-  // Optional model to use (defaults to haiku for speed)
-  model?: "opus" | "sonnet" | "haiku";
+  // Optional alias or explicit model ID; otherwise uses the provider default.
+  model?: "opus" | "sonnet" | "haiku" | "MiniMax-M3.1-Flash" | "MiniMax-M3" | (string & {});
 }
 
 /**

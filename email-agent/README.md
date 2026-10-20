@@ -50,6 +50,21 @@ bun run dev
 
 6. Open your browser to `http://localhost:3000`
 
+### MiniMax Provider
+
+The structured action and listener calls can use MiniMax through its compatible API. Set these values in `.env`:
+
+```env
+LLM_PROVIDER=MiniMax
+MINIMAX_API_KEY=your-minimax-api-key
+MINIMAX_REGION=global_en
+MINIMAX_MODEL=MiniMax-M3.1-Flash
+```
+
+`MINIMAX_REGION` accepts `global_en` (`https://api.minimax.io/anthropic`) or `cn_zh` (`https://api.minimaxi.com/anthropic`). The recommended models are `MiniMax-M3.1-Flash` (the default) and `MiniMax-M3`. Explicit model IDs in `MINIMAX_MODEL` or a call's `model` option are passed through unchanged, including legacy or custom IDs; availability depends on the API. Existing `opus`, `sonnet`, and `haiku` aliases use the configured MiniMax model when this provider is selected.
+
+These calls omit thinking and effort overrides: Flash uses its API-default adaptive thinking and effort, while M3 keeps its API default. The main interactive agent still uses the Agent SDK and requires its existing credentials.
+
 ## IMAP Setup Guide
 
 ### Gmail Setup

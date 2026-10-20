@@ -5,7 +5,7 @@ import { DATABASE_PATH } from "../database/config";
 import type { ActionsManager } from "./actions-manager";
 import type { UIStateManager } from "./ui-state-manager";
 import type { ComponentManager } from "./component-manager";
-import Anthropic from "@anthropic-ai/sdk";
+import { createLlmClient } from "./llm-provider";
 
 // Main WebSocket handler class
 export class WebSocketHandler {
@@ -557,19 +557,9 @@ export class WebSocketHandler {
           schema: options.schema
         });
 
-        const anthropic = new Anthropic({
-          apiKey: process.env.ANTHROPIC_API_KEY
-        });
+        const { client, model } = createLlmClient(options.model);
 
-        const modelMap: Record<string, string> = {
-          opus: "claude-opus-4-20250514",
-          sonnet: "claude-sonnet-4-20250514",
-          haiku: "claude-3-5-haiku-20241022"
-        };
-
-        const model = modelMap[options.model || "haiku"];
-
-        const response = await anthropic.messages.create({
+        const response = await client.messages.create({
           model,
           max_tokens: 4096,
           messages: [
