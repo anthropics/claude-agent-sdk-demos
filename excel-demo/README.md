@@ -15,7 +15,7 @@ This Electron-based desktop application demonstrates how to:
 
 ### Example Use Cases
 
-The `agent/` folder contains Python examples including:
+The `agent/` folder holds the Excel agent's instructions and the xlsx skill. Things you can ask the agent to build include:
 - **Workout Tracker**: A fitness log with automatic summary statistics and multiple sheets
 - **Budget Tracker**: Financial tracking with formulas and data validation
 - Custom spreadsheet generation with styling, borders, and conditional formatting
@@ -51,9 +51,9 @@ npm start
 # or bun start
 ```
 
-## Working with Python Examples
+## Working with the Python Agent Setup
 
-The `agent/` directory contains Python scripts demonstrating spreadsheet generation:
+The `agent/` directory contains the Excel agent's instructions (`CLAUDE.MD`), its Python requirements, and the xlsx skill (`.claude/skills/xlsx/`). It does not include ready-made example scripts; the agent generates spreadsheets with `openpyxl` on request.
 
 ### Setup Python Environment
 
@@ -64,14 +64,12 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### Run Example Scripts
+### Recalculate Formulas
+
+After the agent writes a workbook, recalculate its formulas with the bundled script (requires LibreOffice):
 
 ```bash
-# Create a workout tracker
-python create_workout_tracker.py
-
-# Create a budget tracker
-python create_budget_tracker.py
+python .claude/skills/xlsx/recalc.py <excel_file> [timeout_seconds]
 ```
 
 See the [agent/README.md](./agent/README.md) for more details on the Excel agent setup and capabilities.
@@ -89,9 +87,10 @@ See the [agent/README.md](./agent/README.md) for more details on the Excel agent
 
 ```
 excel-demo/
-├── agent/              # Python examples and Excel agent setup
-│   ├── create_workout_tracker.py
-│   ├── create_budget_tracker.py
+├── agent/              # Excel agent setup
+│   ├── CLAUDE.MD       # Excel agent instructions
+│   ├── requirements.txt
+│   ├── .claude/skills/xlsx/  # xlsx skill and recalc.py
 │   └── README.md       # Excel agent documentation
 ├── src/
 │   ├── main/          # Electron main process
