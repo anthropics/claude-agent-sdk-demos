@@ -22,7 +22,7 @@ The `agent/` folder contains Python examples including:
 
 ## Prerequisites
 
-- [Node.js 18+](https://nodejs.org) or [Bun](https://bun.sh)
+- [Node.js 18+](https://nodejs.org) (with npm)
 - An Anthropic API key ([get one here](https://console.anthropic.com))
 - Python 3.9+ (for the Python agent examples)
 - LibreOffice (optional, for formula recalculation)
@@ -38,8 +38,9 @@ cd sdk-demos/excel-demo
 2. Install dependencies:
 ```bash
 npm install
-# or bun install
 ```
+
+> **Note:** Use `npm` rather than `bun` to install. `bun install` has been reported to fail in the `electron-builder install-app-deps` postinstall step (see [#48](https://github.com/anthropics/claude-agent-sdk-demos/issues/48)).
 
 3. Configure your Anthropic API key:
    - Set the `ANTHROPIC_API_KEY` environment variable, or
