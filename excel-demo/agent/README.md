@@ -61,7 +61,7 @@ python .claude/skills/xlsx/recalc.py <excel_file> [timeout_seconds]
 
 Example:
 ```bash
-python .claude/skills/xlsx/recalc.py Budget_Tracker.csv 30
+python .claude/skills/xlsx/recalc.py my_workbook.xlsx 30
 ```
 
 The script will:
@@ -73,9 +73,6 @@ The script will:
 ## Files in this Folder
 
 - `CLAUDE.MD` - Instructions for the Excel Agent
-- `budget_tracker_template.py` - Python template for budget tracking
-- `Budget_Tracker.csv` - Sample budget data
-- `Income_Tracker.csv` - Sample income data
 - `.venv/` - Python virtual environment
 - `requirements.txt` - Python dependencies
 - `.claude/skills/xlsx/` - xlsx skill files
